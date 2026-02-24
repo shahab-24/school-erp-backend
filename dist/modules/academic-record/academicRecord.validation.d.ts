@@ -9,15 +9,15 @@ export declare const upsertRecordSchema: z.ZodObject<{
     marks: z.ZodRecord<z.ZodString, z.ZodRecord<z.ZodString, z.ZodNumber>>;
 }, "strip", z.ZodTypeAny, {
     session: string;
-    studentId: string;
     class: number;
+    studentId: string;
     scope: "terminal" | "annual";
     marks: Record<string, Record<string, number>>;
     terminalKey?: string | undefined;
 }, {
     session: string;
-    studentId: string;
     class: number;
+    studentId: string;
     scope: "terminal" | "annual";
     marks: Record<string, Record<string, number>>;
     terminalKey?: string | undefined;

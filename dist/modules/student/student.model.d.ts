@@ -1,140 +1,164 @@
-import { Schema, Types } from "mongoose";
+import { Schema } from "mongoose";
 export declare const Student: import("mongoose").Model<{
     status: "repeat" | "active" | "passed" | "transferred" | "archived";
     name: {};
     studentUid: string;
-    languagePreference: string;
-    guardians: Types.DocumentArray<{
+    birthRegistration: string;
+    father: {
         name: {};
-        relation: "father" | "mother" | "guardian";
-        mobile?: string | null | undefined;
-        nid?: string | null | undefined;
-        birthRegistration?: string | null | undefined;
-    }, Types.Subdocument<import("bson").ObjectId, any, {
+        mobile: string;
+        nid: string;
+        birthRegistration: string;
+    };
+    mother: {
         name: {};
-        relation: "father" | "mother" | "guardian";
-        mobile?: string | null | undefined;
+        mobile: string;
+        nid: string;
+        birthRegistration: string;
+    };
+    gender: "other" | "male" | "female";
+    religion: string;
+    birthDate: NativeDate;
+    languagePreference: "bn" | "en";
+    guardians: import("mongoose").Types.DocumentArray<{
+        name: {};
+        mobile: string;
+        relation: "guardian" | "other";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
         nid?: string | null | undefined;
-        birthRegistration?: string | null | undefined;
+    }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
+        name: {};
+        mobile: string;
+        relation: "guardian" | "other";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
+        nid?: string | null | undefined;
     }> & {
         name: {};
-        relation: "father" | "mother" | "guardian";
-        mobile?: string | null | undefined;
+        mobile: string;
+        relation: "guardian" | "other";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
         nid?: string | null | undefined;
-        birthRegistration?: string | null | undefined;
     }>;
-    promotions: Types.DocumentArray<{
+    promotions: import("mongoose").Types.DocumentArray<{
         session: string;
-        result: "repeat" | "promoted";
         fromClass: number;
         toClass: number;
+        result: "repeat" | "promoted";
         decidedAt: NativeDate;
         previousRoll?: number | null | undefined;
         newRoll?: number | null | undefined;
-    }, Types.Subdocument<import("bson").ObjectId, any, {
+    }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
         session: string;
-        result: "repeat" | "promoted";
         fromClass: number;
         toClass: number;
+        result: "repeat" | "promoted";
         decidedAt: NativeDate;
         previousRoll?: number | null | undefined;
         newRoll?: number | null | undefined;
     }> & {
         session: string;
-        result: "repeat" | "promoted";
         fromClass: number;
         toClass: number;
+        result: "repeat" | "promoted";
         decidedAt: NativeDate;
         previousRoll?: number | null | undefined;
         newRoll?: number | null | undefined;
     }>;
-    birthRegistration?: string | null | undefined;
-    gender?: "other" | "male" | "female" | null | undefined;
-    religion?: string | null | undefined;
-    birthDate?: NativeDate | null | undefined;
     stipendBeneficiary?: {
         name: string;
         isActive: boolean;
         updatedAt: NativeDate;
-        relation: "father" | "mother" | "guardian" | "other";
         mobile: string;
+        relation: "guardian" | "other" | "father" | "mother";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
         paymentMethod: "mobile_banking" | "bank" | "cash";
-        walletProvider?: "bKash" | "Nagad" | "Rocket" | "Other" | null | undefined;
     } | null | undefined;
     imageUrl?: string | null | undefined;
     current?: {
-        session?: string | null | undefined;
-        class?: number | null | undefined;
-        roll?: number | null | undefined;
+        session: string;
+        class: number;
+        roll: number;
     } | null | undefined;
     archivedAt?: NativeDate | null | undefined;
 } & import("mongoose").DefaultTimestampProps, {}, {}, {}, import("mongoose").Document<unknown, {}, {
     status: "repeat" | "active" | "passed" | "transferred" | "archived";
     name: {};
     studentUid: string;
-    languagePreference: string;
-    guardians: Types.DocumentArray<{
+    birthRegistration: string;
+    father: {
         name: {};
-        relation: "father" | "mother" | "guardian";
-        mobile?: string | null | undefined;
-        nid?: string | null | undefined;
-        birthRegistration?: string | null | undefined;
-    }, Types.Subdocument<import("bson").ObjectId, any, {
+        mobile: string;
+        nid: string;
+        birthRegistration: string;
+    };
+    mother: {
         name: {};
-        relation: "father" | "mother" | "guardian";
-        mobile?: string | null | undefined;
+        mobile: string;
+        nid: string;
+        birthRegistration: string;
+    };
+    gender: "other" | "male" | "female";
+    religion: string;
+    birthDate: NativeDate;
+    languagePreference: "bn" | "en";
+    guardians: import("mongoose").Types.DocumentArray<{
+        name: {};
+        mobile: string;
+        relation: "guardian" | "other";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
         nid?: string | null | undefined;
-        birthRegistration?: string | null | undefined;
+    }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
+        name: {};
+        mobile: string;
+        relation: "guardian" | "other";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
+        nid?: string | null | undefined;
     }> & {
         name: {};
-        relation: "father" | "mother" | "guardian";
-        mobile?: string | null | undefined;
+        mobile: string;
+        relation: "guardian" | "other";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
         nid?: string | null | undefined;
-        birthRegistration?: string | null | undefined;
     }>;
-    promotions: Types.DocumentArray<{
+    promotions: import("mongoose").Types.DocumentArray<{
         session: string;
-        result: "repeat" | "promoted";
         fromClass: number;
         toClass: number;
+        result: "repeat" | "promoted";
         decidedAt: NativeDate;
         previousRoll?: number | null | undefined;
         newRoll?: number | null | undefined;
-    }, Types.Subdocument<import("bson").ObjectId, any, {
+    }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
         session: string;
-        result: "repeat" | "promoted";
         fromClass: number;
         toClass: number;
+        result: "repeat" | "promoted";
         decidedAt: NativeDate;
         previousRoll?: number | null | undefined;
         newRoll?: number | null | undefined;
     }> & {
         session: string;
-        result: "repeat" | "promoted";
         fromClass: number;
         toClass: number;
+        result: "repeat" | "promoted";
         decidedAt: NativeDate;
         previousRoll?: number | null | undefined;
         newRoll?: number | null | undefined;
     }>;
-    birthRegistration?: string | null | undefined;
-    gender?: "other" | "male" | "female" | null | undefined;
-    religion?: string | null | undefined;
-    birthDate?: NativeDate | null | undefined;
     stipendBeneficiary?: {
         name: string;
         isActive: boolean;
         updatedAt: NativeDate;
-        relation: "father" | "mother" | "guardian" | "other";
         mobile: string;
+        relation: "guardian" | "other" | "father" | "mother";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
         paymentMethod: "mobile_banking" | "bank" | "cash";
-        walletProvider?: "bKash" | "Nagad" | "Rocket" | "Other" | null | undefined;
     } | null | undefined;
     imageUrl?: string | null | undefined;
     current?: {
-        session?: string | null | undefined;
-        class?: number | null | undefined;
-        roll?: number | null | undefined;
+        session: string;
+        class: number;
+        roll: number;
     } | null | undefined;
     archivedAt?: NativeDate | null | undefined;
 } & import("mongoose").DefaultTimestampProps, {}, {
@@ -143,73 +167,85 @@ export declare const Student: import("mongoose").Model<{
     status: "repeat" | "active" | "passed" | "transferred" | "archived";
     name: {};
     studentUid: string;
-    languagePreference: string;
-    guardians: Types.DocumentArray<{
+    birthRegistration: string;
+    father: {
         name: {};
-        relation: "father" | "mother" | "guardian";
-        mobile?: string | null | undefined;
-        nid?: string | null | undefined;
-        birthRegistration?: string | null | undefined;
-    }, Types.Subdocument<import("bson").ObjectId, any, {
+        mobile: string;
+        nid: string;
+        birthRegistration: string;
+    };
+    mother: {
         name: {};
-        relation: "father" | "mother" | "guardian";
-        mobile?: string | null | undefined;
+        mobile: string;
+        nid: string;
+        birthRegistration: string;
+    };
+    gender: "other" | "male" | "female";
+    religion: string;
+    birthDate: NativeDate;
+    languagePreference: "bn" | "en";
+    guardians: import("mongoose").Types.DocumentArray<{
+        name: {};
+        mobile: string;
+        relation: "guardian" | "other";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
         nid?: string | null | undefined;
-        birthRegistration?: string | null | undefined;
+    }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
+        name: {};
+        mobile: string;
+        relation: "guardian" | "other";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
+        nid?: string | null | undefined;
     }> & {
         name: {};
-        relation: "father" | "mother" | "guardian";
-        mobile?: string | null | undefined;
+        mobile: string;
+        relation: "guardian" | "other";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
         nid?: string | null | undefined;
-        birthRegistration?: string | null | undefined;
     }>;
-    promotions: Types.DocumentArray<{
+    promotions: import("mongoose").Types.DocumentArray<{
         session: string;
-        result: "repeat" | "promoted";
         fromClass: number;
         toClass: number;
+        result: "repeat" | "promoted";
         decidedAt: NativeDate;
         previousRoll?: number | null | undefined;
         newRoll?: number | null | undefined;
-    }, Types.Subdocument<import("bson").ObjectId, any, {
+    }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
         session: string;
-        result: "repeat" | "promoted";
         fromClass: number;
         toClass: number;
+        result: "repeat" | "promoted";
         decidedAt: NativeDate;
         previousRoll?: number | null | undefined;
         newRoll?: number | null | undefined;
     }> & {
         session: string;
-        result: "repeat" | "promoted";
         fromClass: number;
         toClass: number;
+        result: "repeat" | "promoted";
         decidedAt: NativeDate;
         previousRoll?: number | null | undefined;
         newRoll?: number | null | undefined;
     }>;
-    birthRegistration?: string | null | undefined;
-    gender?: "other" | "male" | "female" | null | undefined;
-    religion?: string | null | undefined;
-    birthDate?: NativeDate | null | undefined;
     stipendBeneficiary?: {
         name: string;
         isActive: boolean;
         updatedAt: NativeDate;
-        relation: "father" | "mother" | "guardian" | "other";
         mobile: string;
+        relation: "guardian" | "other" | "father" | "mother";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
         paymentMethod: "mobile_banking" | "bank" | "cash";
-        walletProvider?: "bKash" | "Nagad" | "Rocket" | "Other" | null | undefined;
     } | null | undefined;
     imageUrl?: string | null | undefined;
     current?: {
-        session?: string | null | undefined;
-        class?: number | null | undefined;
-        roll?: number | null | undefined;
+        session: string;
+        class: number;
+        roll: number;
     } | null | undefined;
     archivedAt?: NativeDate | null | undefined;
 } & import("mongoose").DefaultTimestampProps & {
-    _id: Types.ObjectId;
+    _id: import("mongoose").Types.ObjectId;
 } & {
     __v: number;
 }, Schema<any, import("mongoose").Model<any, any, any, any, any, any>, {}, {}, {}, {}, {
@@ -218,138 +254,162 @@ export declare const Student: import("mongoose").Model<{
     status: "repeat" | "active" | "passed" | "transferred" | "archived";
     name: {};
     studentUid: string;
-    languagePreference: string;
-    guardians: Types.DocumentArray<{
+    birthRegistration: string;
+    father: {
         name: {};
-        relation: "father" | "mother" | "guardian";
-        mobile?: string | null | undefined;
-        nid?: string | null | undefined;
-        birthRegistration?: string | null | undefined;
-    }, Types.Subdocument<import("bson").ObjectId, any, {
+        mobile: string;
+        nid: string;
+        birthRegistration: string;
+    };
+    mother: {
         name: {};
-        relation: "father" | "mother" | "guardian";
-        mobile?: string | null | undefined;
+        mobile: string;
+        nid: string;
+        birthRegistration: string;
+    };
+    gender: "other" | "male" | "female";
+    religion: string;
+    birthDate: NativeDate;
+    languagePreference: "bn" | "en";
+    guardians: import("mongoose").Types.DocumentArray<{
+        name: {};
+        mobile: string;
+        relation: "guardian" | "other";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
         nid?: string | null | undefined;
-        birthRegistration?: string | null | undefined;
+    }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
+        name: {};
+        mobile: string;
+        relation: "guardian" | "other";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
+        nid?: string | null | undefined;
     }> & {
         name: {};
-        relation: "father" | "mother" | "guardian";
-        mobile?: string | null | undefined;
+        mobile: string;
+        relation: "guardian" | "other";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
         nid?: string | null | undefined;
-        birthRegistration?: string | null | undefined;
     }>;
-    promotions: Types.DocumentArray<{
+    promotions: import("mongoose").Types.DocumentArray<{
         session: string;
-        result: "repeat" | "promoted";
         fromClass: number;
         toClass: number;
+        result: "repeat" | "promoted";
         decidedAt: NativeDate;
         previousRoll?: number | null | undefined;
         newRoll?: number | null | undefined;
-    }, Types.Subdocument<import("bson").ObjectId, any, {
+    }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
         session: string;
-        result: "repeat" | "promoted";
         fromClass: number;
         toClass: number;
+        result: "repeat" | "promoted";
         decidedAt: NativeDate;
         previousRoll?: number | null | undefined;
         newRoll?: number | null | undefined;
     }> & {
         session: string;
-        result: "repeat" | "promoted";
         fromClass: number;
         toClass: number;
+        result: "repeat" | "promoted";
         decidedAt: NativeDate;
         previousRoll?: number | null | undefined;
         newRoll?: number | null | undefined;
     }>;
-    birthRegistration?: string | null | undefined;
-    gender?: "other" | "male" | "female" | null | undefined;
-    religion?: string | null | undefined;
-    birthDate?: NativeDate | null | undefined;
     stipendBeneficiary?: {
         name: string;
         isActive: boolean;
         updatedAt: NativeDate;
-        relation: "father" | "mother" | "guardian" | "other";
         mobile: string;
+        relation: "guardian" | "other" | "father" | "mother";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
         paymentMethod: "mobile_banking" | "bank" | "cash";
-        walletProvider?: "bKash" | "Nagad" | "Rocket" | "Other" | null | undefined;
     } | null | undefined;
     imageUrl?: string | null | undefined;
     current?: {
-        session?: string | null | undefined;
-        class?: number | null | undefined;
-        roll?: number | null | undefined;
+        session: string;
+        class: number;
+        roll: number;
     } | null | undefined;
     archivedAt?: NativeDate | null | undefined;
 } & import("mongoose").DefaultTimestampProps, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<{
     status: "repeat" | "active" | "passed" | "transferred" | "archived";
     name: {};
     studentUid: string;
-    languagePreference: string;
-    guardians: Types.DocumentArray<{
+    birthRegistration: string;
+    father: {
         name: {};
-        relation: "father" | "mother" | "guardian";
-        mobile?: string | null | undefined;
-        nid?: string | null | undefined;
-        birthRegistration?: string | null | undefined;
-    }, Types.Subdocument<import("bson").ObjectId, any, {
+        mobile: string;
+        nid: string;
+        birthRegistration: string;
+    };
+    mother: {
         name: {};
-        relation: "father" | "mother" | "guardian";
-        mobile?: string | null | undefined;
+        mobile: string;
+        nid: string;
+        birthRegistration: string;
+    };
+    gender: "other" | "male" | "female";
+    religion: string;
+    birthDate: NativeDate;
+    languagePreference: "bn" | "en";
+    guardians: import("mongoose").Types.DocumentArray<{
+        name: {};
+        mobile: string;
+        relation: "guardian" | "other";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
         nid?: string | null | undefined;
-        birthRegistration?: string | null | undefined;
+    }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
+        name: {};
+        mobile: string;
+        relation: "guardian" | "other";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
+        nid?: string | null | undefined;
     }> & {
         name: {};
-        relation: "father" | "mother" | "guardian";
-        mobile?: string | null | undefined;
+        mobile: string;
+        relation: "guardian" | "other";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
         nid?: string | null | undefined;
-        birthRegistration?: string | null | undefined;
     }>;
-    promotions: Types.DocumentArray<{
+    promotions: import("mongoose").Types.DocumentArray<{
         session: string;
-        result: "repeat" | "promoted";
         fromClass: number;
         toClass: number;
+        result: "repeat" | "promoted";
         decidedAt: NativeDate;
         previousRoll?: number | null | undefined;
         newRoll?: number | null | undefined;
-    }, Types.Subdocument<import("bson").ObjectId, any, {
+    }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
         session: string;
-        result: "repeat" | "promoted";
         fromClass: number;
         toClass: number;
+        result: "repeat" | "promoted";
         decidedAt: NativeDate;
         previousRoll?: number | null | undefined;
         newRoll?: number | null | undefined;
     }> & {
         session: string;
-        result: "repeat" | "promoted";
         fromClass: number;
         toClass: number;
+        result: "repeat" | "promoted";
         decidedAt: NativeDate;
         previousRoll?: number | null | undefined;
         newRoll?: number | null | undefined;
     }>;
-    birthRegistration?: string | null | undefined;
-    gender?: "other" | "male" | "female" | null | undefined;
-    religion?: string | null | undefined;
-    birthDate?: NativeDate | null | undefined;
     stipendBeneficiary?: {
         name: string;
         isActive: boolean;
         updatedAt: NativeDate;
-        relation: "father" | "mother" | "guardian" | "other";
         mobile: string;
+        relation: "guardian" | "other" | "father" | "mother";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
         paymentMethod: "mobile_banking" | "bank" | "cash";
-        walletProvider?: "bKash" | "Nagad" | "Rocket" | "Other" | null | undefined;
     } | null | undefined;
     imageUrl?: string | null | undefined;
     current?: {
-        session?: string | null | undefined;
-        class?: number | null | undefined;
-        roll?: number | null | undefined;
+        session: string;
+        class: number;
+        roll: number;
     } | null | undefined;
     archivedAt?: NativeDate | null | undefined;
 } & import("mongoose").DefaultTimestampProps>, {}, import("mongoose").ResolveSchemaOptions<{
@@ -358,73 +418,85 @@ export declare const Student: import("mongoose").Model<{
     status: "repeat" | "active" | "passed" | "transferred" | "archived";
     name: {};
     studentUid: string;
-    languagePreference: string;
-    guardians: Types.DocumentArray<{
+    birthRegistration: string;
+    father: {
         name: {};
-        relation: "father" | "mother" | "guardian";
-        mobile?: string | null | undefined;
-        nid?: string | null | undefined;
-        birthRegistration?: string | null | undefined;
-    }, Types.Subdocument<import("bson").ObjectId, any, {
+        mobile: string;
+        nid: string;
+        birthRegistration: string;
+    };
+    mother: {
         name: {};
-        relation: "father" | "mother" | "guardian";
-        mobile?: string | null | undefined;
+        mobile: string;
+        nid: string;
+        birthRegistration: string;
+    };
+    gender: "other" | "male" | "female";
+    religion: string;
+    birthDate: NativeDate;
+    languagePreference: "bn" | "en";
+    guardians: import("mongoose").Types.DocumentArray<{
+        name: {};
+        mobile: string;
+        relation: "guardian" | "other";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
         nid?: string | null | undefined;
-        birthRegistration?: string | null | undefined;
+    }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
+        name: {};
+        mobile: string;
+        relation: "guardian" | "other";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
+        nid?: string | null | undefined;
     }> & {
         name: {};
-        relation: "father" | "mother" | "guardian";
-        mobile?: string | null | undefined;
+        mobile: string;
+        relation: "guardian" | "other";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
         nid?: string | null | undefined;
-        birthRegistration?: string | null | undefined;
     }>;
-    promotions: Types.DocumentArray<{
+    promotions: import("mongoose").Types.DocumentArray<{
         session: string;
-        result: "repeat" | "promoted";
         fromClass: number;
         toClass: number;
+        result: "repeat" | "promoted";
         decidedAt: NativeDate;
         previousRoll?: number | null | undefined;
         newRoll?: number | null | undefined;
-    }, Types.Subdocument<import("bson").ObjectId, any, {
+    }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
         session: string;
-        result: "repeat" | "promoted";
         fromClass: number;
         toClass: number;
+        result: "repeat" | "promoted";
         decidedAt: NativeDate;
         previousRoll?: number | null | undefined;
         newRoll?: number | null | undefined;
     }> & {
         session: string;
-        result: "repeat" | "promoted";
         fromClass: number;
         toClass: number;
+        result: "repeat" | "promoted";
         decidedAt: NativeDate;
         previousRoll?: number | null | undefined;
         newRoll?: number | null | undefined;
     }>;
-    birthRegistration?: string | null | undefined;
-    gender?: "other" | "male" | "female" | null | undefined;
-    religion?: string | null | undefined;
-    birthDate?: NativeDate | null | undefined;
     stipendBeneficiary?: {
         name: string;
         isActive: boolean;
         updatedAt: NativeDate;
-        relation: "father" | "mother" | "guardian" | "other";
         mobile: string;
+        relation: "guardian" | "other" | "father" | "mother";
+        walletProvider: "bKash" | "Nagad" | "Rocket" | "Other";
         paymentMethod: "mobile_banking" | "bank" | "cash";
-        walletProvider?: "bKash" | "Nagad" | "Rocket" | "Other" | null | undefined;
     } | null | undefined;
     imageUrl?: string | null | undefined;
     current?: {
-        session?: string | null | undefined;
-        class?: number | null | undefined;
-        roll?: number | null | undefined;
+        session: string;
+        class: number;
+        roll: number;
     } | null | undefined;
     archivedAt?: NativeDate | null | undefined;
 } & import("mongoose").DefaultTimestampProps> & {
-    _id: Types.ObjectId;
+    _id: import("mongoose").Types.ObjectId;
 } & {
     __v: number;
 }>>;

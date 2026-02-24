@@ -1,8 +1,8 @@
 export declare const ResultSnapshotService: {
     publish(payload: any): Promise<import("mongoose").MergeType<import("mongoose").Document<unknown, {}, {
         session: string;
-        studentId: string;
         class: number;
+        studentId: string;
         scope: "terminal" | "annual";
         publishedAt: NativeDate;
         failed: boolean;
@@ -32,8 +32,8 @@ export declare const ResultSnapshotService: {
         timestamps: true;
     }> & {
         session: string;
-        studentId: string;
         class: number;
+        studentId: string;
         scope: "terminal" | "annual";
         publishedAt: NativeDate;
         failed: boolean;
@@ -71,8 +71,8 @@ export declare const ResultSnapshotService: {
         class: number;
     }): Promise<(import("mongoose").FlattenMaps<{
         session: string;
-        studentId: string;
         class: number;
+        studentId: string;
         scope: "terminal" | "annual";
         publishedAt: NativeDate;
         failed: boolean;
@@ -151,8 +151,8 @@ export declare const ResultSnapshotService: {
         session: string;
     }): Promise<(import("mongoose").FlattenMaps<{
         session: string;
-        studentId: string;
         class: number;
+        studentId: string;
         scope: "terminal" | "annual";
         publishedAt: NativeDate;
         failed: boolean;

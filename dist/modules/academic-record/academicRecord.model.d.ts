@@ -2,8 +2,8 @@ import { Schema } from "mongoose";
 export declare const AcademicRecord: import("mongoose").Model<{
     session: string;
     status: "DRAFT" | "SUBMITTED" | "PUBLISHED";
-    studentId: string;
     class: number;
+    studentId: string;
     scope: "terminal" | "annual";
     marks: {};
     terminalKey?: string | null | undefined;
@@ -12,8 +12,8 @@ export declare const AcademicRecord: import("mongoose").Model<{
 } & import("mongoose").DefaultTimestampProps, {}, {}, {}, import("mongoose").Document<unknown, {}, {
     session: string;
     status: "DRAFT" | "SUBMITTED" | "PUBLISHED";
-    studentId: string;
     class: number;
+    studentId: string;
     scope: "terminal" | "annual";
     marks: {};
     terminalKey?: string | null | undefined;
@@ -24,8 +24,8 @@ export declare const AcademicRecord: import("mongoose").Model<{
 }> & {
     session: string;
     status: "DRAFT" | "SUBMITTED" | "PUBLISHED";
-    studentId: string;
     class: number;
+    studentId: string;
     scope: "terminal" | "annual";
     marks: {};
     terminalKey?: string | null | undefined;
@@ -40,8 +40,8 @@ export declare const AcademicRecord: import("mongoose").Model<{
 }, {
     session: string;
     status: "DRAFT" | "SUBMITTED" | "PUBLISHED";
-    studentId: string;
     class: number;
+    studentId: string;
     scope: "terminal" | "annual";
     marks: {};
     terminalKey?: string | null | undefined;
@@ -50,8 +50,8 @@ export declare const AcademicRecord: import("mongoose").Model<{
 } & import("mongoose").DefaultTimestampProps, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<{
     session: string;
     status: "DRAFT" | "SUBMITTED" | "PUBLISHED";
-    studentId: string;
     class: number;
+    studentId: string;
     scope: "terminal" | "annual";
     marks: {};
     terminalKey?: string | null | undefined;
@@ -62,8 +62,8 @@ export declare const AcademicRecord: import("mongoose").Model<{
 }>> & import("mongoose").FlatRecord<{
     session: string;
     status: "DRAFT" | "SUBMITTED" | "PUBLISHED";
-    studentId: string;
     class: number;
+    studentId: string;
     scope: "terminal" | "annual";
     marks: {};
     terminalKey?: string | null | undefined;

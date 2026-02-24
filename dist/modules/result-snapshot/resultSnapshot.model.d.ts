@@ -1,8 +1,8 @@
 import { Schema } from "mongoose";
 export declare const ResultSnapshot: import("mongoose").Model<{
     session: string;
-    studentId: string;
     class: number;
+    studentId: string;
     scope: "terminal" | "annual";
     publishedAt: NativeDate;
     failed: boolean;
@@ -30,8 +30,8 @@ export declare const ResultSnapshot: import("mongoose").Model<{
     position?: number | null | undefined;
 } & import("mongoose").DefaultTimestampProps, {}, {}, {}, import("mongoose").Document<unknown, {}, {
     session: string;
-    studentId: string;
     class: number;
+    studentId: string;
     scope: "terminal" | "annual";
     publishedAt: NativeDate;
     failed: boolean;
@@ -61,8 +61,8 @@ export declare const ResultSnapshot: import("mongoose").Model<{
     timestamps: true;
 }> & {
     session: string;
-    studentId: string;
     class: number;
+    studentId: string;
     scope: "terminal" | "annual";
     publishedAt: NativeDate;
     failed: boolean;
@@ -96,8 +96,8 @@ export declare const ResultSnapshot: import("mongoose").Model<{
     timestamps: true;
 }, {
     session: string;
-    studentId: string;
     class: number;
+    studentId: string;
     scope: "terminal" | "annual";
     publishedAt: NativeDate;
     failed: boolean;
@@ -125,8 +125,8 @@ export declare const ResultSnapshot: import("mongoose").Model<{
     position?: number | null | undefined;
 } & import("mongoose").DefaultTimestampProps, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<{
     session: string;
-    studentId: string;
     class: number;
+    studentId: string;
     scope: "terminal" | "annual";
     publishedAt: NativeDate;
     failed: boolean;
@@ -156,8 +156,8 @@ export declare const ResultSnapshot: import("mongoose").Model<{
     timestamps: true;
 }>> & import("mongoose").FlatRecord<{
     session: string;
-    studentId: string;
     class: number;
+    studentId: string;
     scope: "terminal" | "annual";
     publishedAt: NativeDate;
     failed: boolean;

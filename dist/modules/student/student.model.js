@@ -3,25 +3,41 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Student = void 0;
 const mongoose_1 = require("mongoose");
 /**
- * Localized text (EN/BN/Other)
+ * 🌐 Localized text (BN / EN / future languages)
  */
 const LocalizedSchema = new mongoose_1.Schema({}, { strict: false, _id: false });
 /**
- * Guardian
+ * 👨‍👩‍👦 Parent (Father / Mother)
+ */
+const ParentSchema = new mongoose_1.Schema({
+    name: { type: LocalizedSchema, required: true },
+    mobile: { type: String, required: true },
+    nid: { type: String, required: true },
+    birthRegistration: { type: String, required: true },
+}, { _id: false });
+/**
+ * 👤 Guardian (optional – if not father/mother)
  */
 const GuardianSchema = new mongoose_1.Schema({
     relation: {
         type: String,
-        enum: ["father", "mother", "guardian"],
+        enum: ["guardian", "other"],
         required: true,
     },
     name: { type: LocalizedSchema, required: true },
-    mobile: { type: String },
+    mobile: { type: String, required: true },
     nid: { type: String },
-    birthRegistration: { type: String },
+    /**
+     * 💳 stipend / allowance receive method
+     */
+    walletProvider: {
+        type: String,
+        enum: ["bKash", "Nagad", "Rocket", "Other"],
+        required: true,
+    },
 }, { _id: false });
 /**
- * Promotion History
+ * 📈 Promotion History
  */
 const PromotionSchema = new mongoose_1.Schema({
     session: { type: String, required: true },
@@ -37,7 +53,7 @@ const PromotionSchema = new mongoose_1.Schema({
     decidedAt: { type: Date, default: Date.now },
 }, { _id: false });
 /**
- * ✅ Stipend Beneficiary (embedded, single source of truth)
+ * 💰 Stipend Beneficiary (Single source of truth)
  */
 const StipendBeneficiarySchema = new mongoose_1.Schema({
     name: { type: String, required: true },
@@ -55,12 +71,13 @@ const StipendBeneficiarySchema = new mongoose_1.Schema({
     walletProvider: {
         type: String,
         enum: ["bKash", "Nagad", "Rocket", "Other"],
+        required: true,
     },
     isActive: { type: Boolean, default: true },
     updatedAt: { type: Date, default: Date.now },
 }, { _id: false });
 /**
- * Student
+ * 🎓 Student (Final Production Schema)
  */
 const StudentSchema = new mongoose_1.Schema({
     studentUid: {
@@ -73,14 +90,39 @@ const StudentSchema = new mongoose_1.Schema({
     gender: {
         type: String,
         enum: ["male", "female", "other"],
+        required: true,
     },
-    religion: { type: String },
-    birthDate: { type: Date },
-    birthRegistration: { type: String },
-    languagePreference: { type: String, default: "en" },
-    guardians: { type: [GuardianSchema], default: [] },
+    religion: { type: String, required: true },
+    birthDate: { type: Date, required: true },
+    birthRegistration: { type: String, required: true },
+    languagePreference: {
+        type: String,
+        enum: ["bn", "en"],
+        default: "bn",
+    },
     /**
-     * ✅ stipend / upobritti receiver
+     * 👨 Father (mandatory)
+     */
+    father: {
+        type: ParentSchema,
+        required: true,
+    },
+    /**
+     * 👩 Mother (mandatory)
+     */
+    mother: {
+        type: ParentSchema,
+        required: true,
+    },
+    /**
+     * 👤 Optional guardians
+     */
+    guardians: {
+        type: [GuardianSchema],
+        default: [],
+    },
+    /**
+     * 💰 stipend / upobritti receiver
      */
     stipendBeneficiary: {
         type: StipendBeneficiarySchema,
@@ -88,9 +130,9 @@ const StudentSchema = new mongoose_1.Schema({
     },
     imageUrl: { type: String },
     current: {
-        session: { type: String, index: true },
-        class: { type: Number, index: true },
-        roll: { type: Number },
+        session: { type: String, index: true, required: true },
+        class: { type: Number, index: true, required: true },
+        roll: { type: Number, required: true },
     },
     status: {
         type: String,
