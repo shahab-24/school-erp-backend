@@ -40,7 +40,13 @@ if (!isVercel && !isProduction) {
         console.log("📝 File logging enabled for development");
     }
     catch (error) {
-        console.warn("⚠️ Could not create logs directory:", error.message);
+        // সমাধান: unknown টাইপ চেক করা
+        if (error instanceof Error) {
+            console.warn("⚠️ Could not create logs directory:", error.message);
+        }
+        else {
+            console.warn("⚠️ Could not create logs directory:", String(error));
+        }
     }
 }
 // Logger তৈরি
