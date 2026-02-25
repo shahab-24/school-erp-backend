@@ -3,9 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateEnvironment = exports.connectDB = exports.schoolConfig = void 0;
-// src/config/index.ts - PRODUCTION READY VERSION
-const mongoose_1 = __importDefault(require("mongoose"));
+exports.validateEnvironment = exports.schoolConfig = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 const logger_1 = require("../utils/logger");
 dotenv_1.default.config();
@@ -20,49 +18,49 @@ exports.schoolConfig = {
     logoUrl: process.env.SCHOOL_LOGO_URL || "/logo.png",
 };
 // Database connection function
-const connectDB = async (options) => {
-    try {
-        const mongoUri = process.env.MONGO_URI;
-        if (!mongoUri) {
-            throw new Error("MONGO_URI is not defined in environment variables");
-        }
-        // Connection options
-        const connectionOptions = {
-            ...options,
-            maxPoolSize: 10,
-            serverSelectionTimeoutMS: 5000,
-            socketTimeoutMS: 45000,
-            family: 4, // Use IPv4, skip trying IPv6
-        };
-        // Connect to MongoDB
-        await mongoose_1.default.connect(mongoUri, connectionOptions);
-        // Connection event handlers
-        mongoose_1.default.connection.on("connected", () => {
-            logger_1.Logger.info(`✅ MongoDB connected to: ${mongoose_1.default.connection.name}`);
-        });
-        mongoose_1.default.connection.on("error", (error) => {
-            logger_1.Logger.error("❌ MongoDB connection error:", error);
-        });
-        mongoose_1.default.connection.on("disconnected", () => {
-            logger_1.Logger.warn("⚠️ MongoDB disconnected");
-        });
-        // Handle process termination
-        process.on("SIGINT", async () => {
-            await mongoose_1.default.connection.close();
-            logger_1.Logger.info("MongoDB connection closed due to app termination");
-            process.exit(0);
-        });
-    }
-    catch (error) {
-        logger_1.Logger.error("❌ Failed to connect to MongoDB:", error.message);
-        // Provide helpful error messages
-        if (error.name === "MongoServerSelectionError") {
-            logger_1.Logger.error("💡 Tip: Check your MongoDB Atlas connection string and network access");
-        }
-        throw error;
-    }
-};
-exports.connectDB = connectDB;
+// export const connectDB = async (options?: mongoose.ConnectOptions) => {
+//   try {
+//     const mongoUri = process.env.MONGO_URI;
+//     if (!mongoUri) {
+//       throw new Error("MONGO_URI is not defined in environment variables");
+//     }
+//     // Connection options
+//     const connectionOptions: mongoose.ConnectOptions = {
+//       ...options,
+//       maxPoolSize: 10,
+//       serverSelectionTimeoutMS: 5000,
+//       socketTimeoutMS: 45000,
+//       family: 4, // Use IPv4, skip trying IPv6
+//     };
+//     // Connect to MongoDB
+//     await mongoose.connect(mongoUri, connectionOptions);
+//     // Connection event handlers
+//     mongoose.connection.on("connected", () => {
+//       Logger.info(`✅ MongoDB connected to: ${mongoose.connection.name}`);
+//     });
+//     mongoose.connection.on("error", (error) => {
+//       Logger.error("❌ MongoDB connection error:", error);
+//     });
+//     mongoose.connection.on("disconnected", () => {
+//       Logger.warn("⚠️ MongoDB disconnected");
+//     });
+//     // Handle process termination
+//     process.on("SIGINT", async () => {
+//       await mongoose.connection.close();
+//       Logger.info("MongoDB connection closed due to app termination");
+//       process.exit(0);
+//     });
+//   } catch (error: any) {
+//     Logger.error("❌ Failed to connect to MongoDB:", error.message);
+//     // Provide helpful error messages
+//     if (error.name === "MongoServerSelectionError") {
+//       Logger.error(
+//         "💡 Tip: Check your MongoDB Atlas connection string and network access"
+//       );
+//     }
+//     throw error;
+//   }
+// };
 // Environment validation
 const validateEnvironment = () => {
     const required = ["MONGO_URI", "JWT_SECRET", "SCHOOL_NAME_EN"];
@@ -84,7 +82,7 @@ exports.validateEnvironment = validateEnvironment;
 // Export configuration
 exports.default = {
     schoolConfig: exports.schoolConfig,
-    connectDB: exports.connectDB,
+    // connectDB,
     validateEnvironment: exports.validateEnvironment,
 };
 //# sourceMappingURL=index.js.map

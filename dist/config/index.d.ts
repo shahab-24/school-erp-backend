@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 export declare const schoolConfig: {
     nameEn: string;
     nameBn: string;
@@ -8,7 +7,6 @@ export declare const schoolConfig: {
     email: string;
     logoUrl: string;
 };
-export declare const connectDB: (options?: mongoose.ConnectOptions) => Promise<void>;
 export declare const validateEnvironment: () => boolean;
 declare const _default: {
     schoolConfig: {
@@ -20,7 +18,6 @@ declare const _default: {
         email: string;
         logoUrl: string;
     };
-    connectDB: (options?: mongoose.ConnectOptions) => Promise<void>;
     validateEnvironment: () => boolean;
 };
 export default _default;

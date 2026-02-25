@@ -1,7 +1,7 @@
 export declare const AcademicRecordService: {
     upsertDraft(payload: any): Promise<import("mongoose").FlattenMaps<{
-        session: string;
         status: "DRAFT" | "SUBMITTED" | "PUBLISHED";
+        session: string;
         class: number;
         studentId: string;
         scope: "terminal" | "annual";
@@ -17,8 +17,8 @@ export declare const AcademicRecordService: {
         __v: number;
     }>;
     submit(q: any): Promise<(import("mongoose").FlattenMaps<{
-        session: string;
         status: "DRAFT" | "SUBMITTED" | "PUBLISHED";
+        session: string;
         class: number;
         studentId: string;
         scope: "terminal" | "annual";
@@ -34,8 +34,8 @@ export declare const AcademicRecordService: {
         __v: number;
     }) | null>;
     unlock(q: any): Promise<(import("mongoose").FlattenMaps<{
-        session: string;
         status: "DRAFT" | "SUBMITTED" | "PUBLISHED";
+        session: string;
         class: number;
         studentId: string;
         scope: "terminal" | "annual";
@@ -54,8 +54,8 @@ export declare const AcademicRecordService: {
         success: boolean;
     }>;
     listByClass(filter: any): Promise<(import("mongoose").FlattenMaps<{
-        session: string;
         status: "DRAFT" | "SUBMITTED" | "PUBLISHED";
+        session: string;
         class: number;
         studentId: string;
         scope: "terminal" | "annual";

@@ -1,7 +1,7 @@
 import { Schema } from "mongoose";
 export declare const AcademicRecord: import("mongoose").Model<{
-    session: string;
     status: "DRAFT" | "SUBMITTED" | "PUBLISHED";
+    session: string;
     class: number;
     studentId: string;
     scope: "terminal" | "annual";
@@ -10,8 +10,8 @@ export declare const AcademicRecord: import("mongoose").Model<{
     submittedAt?: NativeDate | null | undefined;
     publishedAt?: NativeDate | null | undefined;
 } & import("mongoose").DefaultTimestampProps, {}, {}, {}, import("mongoose").Document<unknown, {}, {
-    session: string;
     status: "DRAFT" | "SUBMITTED" | "PUBLISHED";
+    session: string;
     class: number;
     studentId: string;
     scope: "terminal" | "annual";
@@ -22,8 +22,8 @@ export declare const AcademicRecord: import("mongoose").Model<{
 } & import("mongoose").DefaultTimestampProps, {}, {
     timestamps: true;
 }> & {
-    session: string;
     status: "DRAFT" | "SUBMITTED" | "PUBLISHED";
+    session: string;
     class: number;
     studentId: string;
     scope: "terminal" | "annual";
@@ -38,8 +38,8 @@ export declare const AcademicRecord: import("mongoose").Model<{
 }, Schema<any, import("mongoose").Model<any, any, any, any, any, any>, {}, {}, {}, {}, {
     timestamps: true;
 }, {
-    session: string;
     status: "DRAFT" | "SUBMITTED" | "PUBLISHED";
+    session: string;
     class: number;
     studentId: string;
     scope: "terminal" | "annual";
@@ -48,8 +48,8 @@ export declare const AcademicRecord: import("mongoose").Model<{
     submittedAt?: NativeDate | null | undefined;
     publishedAt?: NativeDate | null | undefined;
 } & import("mongoose").DefaultTimestampProps, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<{
-    session: string;
     status: "DRAFT" | "SUBMITTED" | "PUBLISHED";
+    session: string;
     class: number;
     studentId: string;
     scope: "terminal" | "annual";
@@ -60,8 +60,8 @@ export declare const AcademicRecord: import("mongoose").Model<{
 } & import("mongoose").DefaultTimestampProps>, {}, import("mongoose").ResolveSchemaOptions<{
     timestamps: true;
 }>> & import("mongoose").FlatRecord<{
-    session: string;
     status: "DRAFT" | "SUBMITTED" | "PUBLISHED";
+    session: string;
     class: number;
     studentId: string;
     scope: "terminal" | "annual";

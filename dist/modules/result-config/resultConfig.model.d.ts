@@ -5,18 +5,18 @@ export declare const ResultConfig: import("mongoose").Model<{
     isActive: boolean;
     class: number;
     exams: import("mongoose").Types.DocumentArray<{
-        key: string;
         required: boolean;
+        key: string;
         label: string;
         totalMarks: number;
     }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
-        key: string;
         required: boolean;
+        key: string;
         label: string;
         totalMarks: number;
     }> & {
-        key: string;
         required: boolean;
+        key: string;
         label: string;
         totalMarks: number;
     }>;
@@ -64,18 +64,18 @@ export declare const ResultConfig: import("mongoose").Model<{
     isActive: boolean;
     class: number;
     exams: import("mongoose").Types.DocumentArray<{
-        key: string;
         required: boolean;
+        key: string;
         label: string;
         totalMarks: number;
     }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
-        key: string;
         required: boolean;
+        key: string;
         label: string;
         totalMarks: number;
     }> & {
-        key: string;
         required: boolean;
+        key: string;
         label: string;
         totalMarks: number;
     }>;
@@ -125,18 +125,18 @@ export declare const ResultConfig: import("mongoose").Model<{
     isActive: boolean;
     class: number;
     exams: import("mongoose").Types.DocumentArray<{
-        key: string;
         required: boolean;
+        key: string;
         label: string;
         totalMarks: number;
     }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
-        key: string;
         required: boolean;
+        key: string;
         label: string;
         totalMarks: number;
     }> & {
-        key: string;
         required: boolean;
+        key: string;
         label: string;
         totalMarks: number;
     }>;
@@ -190,18 +190,18 @@ export declare const ResultConfig: import("mongoose").Model<{
     isActive: boolean;
     class: number;
     exams: import("mongoose").Types.DocumentArray<{
-        key: string;
         required: boolean;
+        key: string;
         label: string;
         totalMarks: number;
     }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
-        key: string;
         required: boolean;
+        key: string;
         label: string;
         totalMarks: number;
     }> & {
-        key: string;
         required: boolean;
+        key: string;
         label: string;
         totalMarks: number;
     }>;
@@ -249,18 +249,18 @@ export declare const ResultConfig: import("mongoose").Model<{
     isActive: boolean;
     class: number;
     exams: import("mongoose").Types.DocumentArray<{
-        key: string;
         required: boolean;
+        key: string;
         label: string;
         totalMarks: number;
     }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
-        key: string;
         required: boolean;
+        key: string;
         label: string;
         totalMarks: number;
     }> & {
-        key: string;
         required: boolean;
+        key: string;
         label: string;
         totalMarks: number;
     }>;
@@ -310,18 +310,18 @@ export declare const ResultConfig: import("mongoose").Model<{
     isActive: boolean;
     class: number;
     exams: import("mongoose").Types.DocumentArray<{
-        key: string;
         required: boolean;
+        key: string;
         label: string;
         totalMarks: number;
     }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
-        key: string;
         required: boolean;
+        key: string;
         label: string;
         totalMarks: number;
     }> & {
-        key: string;
         required: boolean;
+        key: string;
         label: string;
         totalMarks: number;
     }>;
