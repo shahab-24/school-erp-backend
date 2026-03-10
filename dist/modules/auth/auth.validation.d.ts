@@ -9,3 +9,4 @@ export declare const loginSchema: z.ZodObject<{
     email: string;
     password: string;
 }>;
+export type LoginInput = z.infer<typeof loginSchema>;

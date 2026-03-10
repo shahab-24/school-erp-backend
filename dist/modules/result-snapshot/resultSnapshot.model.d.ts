@@ -2,6 +2,7 @@ import { Schema } from "mongoose";
 export declare const ResultSnapshot: import("mongoose").Model<{
     session: string;
     class: number;
+    total: number;
     studentId: string;
     scope: "terminal" | "annual";
     publishedAt: NativeDate;
@@ -24,13 +25,13 @@ export declare const ResultSnapshot: import("mongoose").Model<{
         final: number;
         failed: boolean;
     }>;
-    total: number;
     percentage: number;
-    terminalKey?: string | null | undefined;
     position?: number | null | undefined;
+    terminalKey?: string | null | undefined;
 } & import("mongoose").DefaultTimestampProps, {}, {}, {}, import("mongoose").Document<unknown, {}, {
     session: string;
     class: number;
+    total: number;
     studentId: string;
     scope: "terminal" | "annual";
     publishedAt: NativeDate;
@@ -53,15 +54,15 @@ export declare const ResultSnapshot: import("mongoose").Model<{
         final: number;
         failed: boolean;
     }>;
-    total: number;
     percentage: number;
-    terminalKey?: string | null | undefined;
     position?: number | null | undefined;
+    terminalKey?: string | null | undefined;
 } & import("mongoose").DefaultTimestampProps, {}, {
     timestamps: true;
 }> & {
     session: string;
     class: number;
+    total: number;
     studentId: string;
     scope: "terminal" | "annual";
     publishedAt: NativeDate;
@@ -84,10 +85,9 @@ export declare const ResultSnapshot: import("mongoose").Model<{
         final: number;
         failed: boolean;
     }>;
-    total: number;
     percentage: number;
-    terminalKey?: string | null | undefined;
     position?: number | null | undefined;
+    terminalKey?: string | null | undefined;
 } & import("mongoose").DefaultTimestampProps & {
     _id: import("mongoose").Types.ObjectId;
 } & {
@@ -97,6 +97,7 @@ export declare const ResultSnapshot: import("mongoose").Model<{
 }, {
     session: string;
     class: number;
+    total: number;
     studentId: string;
     scope: "terminal" | "annual";
     publishedAt: NativeDate;
@@ -119,13 +120,13 @@ export declare const ResultSnapshot: import("mongoose").Model<{
         final: number;
         failed: boolean;
     }>;
-    total: number;
     percentage: number;
-    terminalKey?: string | null | undefined;
     position?: number | null | undefined;
+    terminalKey?: string | null | undefined;
 } & import("mongoose").DefaultTimestampProps, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<{
     session: string;
     class: number;
+    total: number;
     studentId: string;
     scope: "terminal" | "annual";
     publishedAt: NativeDate;
@@ -148,15 +149,15 @@ export declare const ResultSnapshot: import("mongoose").Model<{
         final: number;
         failed: boolean;
     }>;
-    total: number;
     percentage: number;
-    terminalKey?: string | null | undefined;
     position?: number | null | undefined;
+    terminalKey?: string | null | undefined;
 } & import("mongoose").DefaultTimestampProps>, {}, import("mongoose").ResolveSchemaOptions<{
     timestamps: true;
 }>> & import("mongoose").FlatRecord<{
     session: string;
     class: number;
+    total: number;
     studentId: string;
     scope: "terminal" | "annual";
     publishedAt: NativeDate;
@@ -179,10 +180,9 @@ export declare const ResultSnapshot: import("mongoose").Model<{
         final: number;
         failed: boolean;
     }>;
-    total: number;
     percentage: number;
-    terminalKey?: string | null | undefined;
     position?: number | null | undefined;
+    terminalKey?: string | null | undefined;
 } & import("mongoose").DefaultTimestampProps> & {
     _id: import("mongoose").Types.ObjectId;
 } & {

@@ -1,14 +1,12 @@
 import {
   ResultConfigDTO,
   AcademicRecordDTO,
-  EngineOptions,
   StudentResult,
   SubjectResult,
+  MarkStructureDTO,
 } from "./resultEngine.types";
-import {
-  validateConfig,
-  validateRecordAgainstConfig,
-} from "./resultEngine.validator";
+
+import { validateConfig } from "./resultEngine.validator";
 import { ResultEngineError } from "./resultEngine.errors";
 
 function normalize(obtained: number, from: number, to: number) {
@@ -27,21 +25,27 @@ function aggregate(
 
   if (type === "average") {
     const keys = examKeys!;
+
     const picked = keys.map((k) => values[k]).filter((v) => v != null);
+
     if (!picked.length) return 0;
+
     return picked.reduce((a, b) => a + b, 0) / picked.length;
   }
 
   if (type === "weighted") {
     let totalWeight = 0;
     let sum = 0;
+
     for (const [k, w] of Object.entries(weights!)) {
       if (values[k] != null) {
         totalWeight += w;
         sum += values[k] * w;
       }
     }
+
     if (!totalWeight) return 0;
+
     return sum / totalWeight;
   }
 
@@ -51,22 +55,22 @@ function aggregate(
 export function calculateResults(
   records: AcademicRecordDTO[],
   cfg: ResultConfigDTO,
-  options: EngineOptions
+  structure: MarkStructureDTO
 ): StudentResult[] {
-  validateConfig(cfg);
+  validateConfig(cfg, structure);
 
   const normMap = new Map(cfg.normalization.map((n) => [n.examKey, n]));
-  const maxTotal = cfg.exams.reduce(
-    (s, e) => s + (normMap.get(e.key)?.to ?? 0),
+
+  const maxTotal = structure.components.reduce(
+    (s, c) => s + (normMap.get(c.key)?.to ?? 0),
     0
   );
 
   const results: StudentResult[] = [];
 
   for (const rec of records) {
-    validateRecordAgainstConfig(rec, cfg);
-
     const subjectsOut: Record<string, SubjectResult> = {};
+
     let studentTotal = 0;
     let anySubjectFail = false;
 
@@ -74,29 +78,32 @@ export function calculateResults(
       const normalized: Record<string, number> = {};
 
       for (const [examKey, obtained] of Object.entries(exams)) {
-        // terminal-aware filter (optional)
-        if (options.scope === "terminal" && options.terminalKeyPrefix) {
-          if (!examKey.startsWith(options.terminalKeyPrefix)) continue;
-        }
-
         const n = normMap.get(examKey);
-        if (!n) continue; // exam not contributing to this config
+
+        if (!n) continue;
 
         normalized[examKey] = normalize(obtained, n.from, n.to);
       }
 
       const final = aggregate(normalized, cfg);
+
       const failed = cfg.passRules?.failIfAnySubjectFail
         ? final < (cfg.passRules?.passPercentage ?? 33)
         : false;
 
       if (failed) anySubjectFail = true;
 
-      subjectsOut[subjectId] = { normalized, final, failed };
+      subjectsOut[subjectId] = {
+        normalized,
+        final,
+        failed,
+      };
+
       studentTotal += final;
     }
 
     const percentage = maxTotal > 0 ? (studentTotal / maxTotal) * 100 : 0;
+
     const failed = cfg.passRules?.failIfAnySubjectFail ? anySubjectFail : false;
 
     results.push({

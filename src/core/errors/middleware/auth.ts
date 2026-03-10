@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { UnauthorizedError } from "../httpErrors";
 
-
 export interface AuthRequest extends Request {
   user?: {
     userId: string;
@@ -12,13 +11,23 @@ export interface AuthRequest extends Request {
 
 export const auth = () => {
   return (req: AuthRequest, _res: Response, next: NextFunction) => {
+    let token: string | undefined;
+
     const authHeader = req.headers.authorization;
 
-    if (!authHeader?.startsWith("Bearer ")) {
-      throw new UnauthorizedError("Token missing");
+    // 1️⃣ Authorization header
+    if (authHeader?.startsWith("Bearer ")) {
+      token = authHeader.split(" ")[1];
     }
 
-    const token = authHeader.split(" ")[1];
+    // 2️⃣ Cookie fallback
+    if (!token && req.cookies?.token) {
+      token = req.cookies.token;
+    }
+
+    if (!token) {
+      throw new UnauthorizedError("Token missing");
+    }
 
     try {
       const decoded = jwt.verify(
@@ -33,7 +42,7 @@ export const auth = () => {
 
       next();
     } catch {
-      throw new UnauthorizedError("Invalid token");
+      throw new UnauthorizedError("Invalid or expired token");
     }
   };
 };

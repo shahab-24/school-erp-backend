@@ -8,11 +8,19 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const httpErrors_1 = require("../httpErrors");
 const auth = () => {
     return (req, _res, next) => {
+        let token;
         const authHeader = req.headers.authorization;
-        if (!authHeader?.startsWith("Bearer ")) {
+        // 1️⃣ Authorization header
+        if (authHeader?.startsWith("Bearer ")) {
+            token = authHeader.split(" ")[1];
+        }
+        // 2️⃣ Cookie fallback
+        if (!token && req.cookies?.token) {
+            token = req.cookies.token;
+        }
+        if (!token) {
             throw new httpErrors_1.UnauthorizedError("Token missing");
         }
-        const token = authHeader.split(" ")[1];
         try {
             const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
             req.user = {
@@ -22,7 +30,7 @@ const auth = () => {
             next();
         }
         catch {
-            throw new httpErrors_1.UnauthorizedError("Invalid token");
+            throw new httpErrors_1.UnauthorizedError("Invalid or expired token");
         }
     };
 };

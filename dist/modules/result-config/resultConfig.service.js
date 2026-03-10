@@ -4,27 +4,39 @@ exports.ResultConfigService = void 0;
 const resultConfig_model_1 = require("./resultConfig.model");
 exports.ResultConfigService = {
     async create(payload) {
-        // deactivate previous active config for same session+class
-        await resultConfig_model_1.ResultConfig.updateMany({ session: payload.session, class: payload.class, isActive: true }, { $set: { isActive: false } });
-        const last = await resultConfig_model_1.ResultConfig.findOne({
+        await resultConfig_model_1.ResultConfig.updateMany({
+            schoolId: payload.schoolId,
             session: payload.session,
             class: payload.class,
+            examTypeId: payload.examTypeId,
+            isActive: true,
+        }, { $set: { isActive: false } });
+        const last = await resultConfig_model_1.ResultConfig.findOne({
+            schoolId: payload.schoolId,
+            session: payload.session,
+            class: payload.class,
+            examTypeId: payload.examTypeId,
         })
             .sort({ version: -1 })
             .lean();
         const version = last ? last.version + 1 : 1;
-        return resultConfig_model_1.ResultConfig.create({ ...payload, version, isActive: true });
+        return resultConfig_model_1.ResultConfig.create({
+            ...payload,
+            version,
+            isActive: true,
+        });
     },
-    async getActive(session, cls) {
-        return resultConfig_model_1.ResultConfig.findOne({ session, class: cls, isActive: true }).lean();
+    async getActive(schoolId, session, cls, examTypeId) {
+        return resultConfig_model_1.ResultConfig.findOne({
+            schoolId,
+            session,
+            class: cls,
+            examTypeId,
+            isActive: true,
+        }).lean();
     },
-    async list(session, cls) {
-        const q = {};
-        if (session)
-            q.session = session;
-        if (cls)
-            q.class = cls;
-        return resultConfig_model_1.ResultConfig.find(q).sort({ createdAt: -1 }).lean();
+    async list(query) {
+        return resultConfig_model_1.ResultConfig.find(query).sort({ createdAt: -1 }).lean();
     },
 };
 //# sourceMappingURL=resultConfig.service.js.map

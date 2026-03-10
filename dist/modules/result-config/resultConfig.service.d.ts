@@ -1,166 +1,98 @@
 export declare const ResultConfigService: {
     create(payload: any): Promise<import("mongoose").Document<unknown, {}, {
+        isActive: boolean;
         session: string;
         version: number;
-        isActive: boolean;
         class: number;
-        exams: import("mongoose").Types.DocumentArray<{
-            required: boolean;
-            key: string;
-            label: string;
-            totalMarks: number;
-        }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
-            required: boolean;
-            key: string;
-            label: string;
-            totalMarks: number;
-        }> & {
-            required: boolean;
-            key: string;
-            label: string;
-            totalMarks: number;
-        }>;
+        schoolId: import("mongoose").Types.ObjectId;
+        examTypeId: import("mongoose").Types.ObjectId;
+        markStructureId: import("mongoose").Types.ObjectId;
         normalization: import("mongoose").Types.DocumentArray<{
-            examKey: string;
-            from: number;
-            to: number;
+            examKey?: string | null | undefined;
+            from?: number | null | undefined;
+            to?: number | null | undefined;
         }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
-            examKey: string;
-            from: number;
-            to: number;
+            examKey?: string | null | undefined;
+            from?: number | null | undefined;
+            to?: number | null | undefined;
         }> & {
-            examKey: string;
-            from: number;
-            to: number;
+            examKey?: string | null | undefined;
+            from?: number | null | undefined;
+            to?: number | null | undefined;
         }>;
-        aggregation: {
-            type: "sum" | "average" | "weighted";
+        gradingSystemId?: import("mongoose").Types.ObjectId | null | undefined;
+        aggregation?: {
             examKeys: string[];
+            type?: "sum" | "average" | "weighted" | null | undefined;
             weights?: Map<string, number> | null | undefined;
-        };
-        passRules?: {
-            passPercentage: number;
-            failIfAnySubjectFail: boolean;
         } | null | undefined;
-        grading?: {
-            type: "percentage" | "gpa";
-            scale: import("mongoose").Types.DocumentArray<{
-                min: number;
-                label: string;
-                point?: number | null | undefined;
-            }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
-                min: number;
-                label: string;
-                point?: number | null | undefined;
-            }> & {
-                min: number;
-                label: string;
-                point?: number | null | undefined;
-            }>;
+        passRules?: {
+            passPercentage?: number | null | undefined;
+            failIfAnySubjectFail?: boolean | null | undefined;
         } | null | undefined;
     } & import("mongoose").DefaultTimestampProps, {}, {
         timestamps: true;
     }> & {
+        isActive: boolean;
         session: string;
         version: number;
-        isActive: boolean;
         class: number;
-        exams: import("mongoose").Types.DocumentArray<{
-            required: boolean;
-            key: string;
-            label: string;
-            totalMarks: number;
-        }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
-            required: boolean;
-            key: string;
-            label: string;
-            totalMarks: number;
-        }> & {
-            required: boolean;
-            key: string;
-            label: string;
-            totalMarks: number;
-        }>;
+        schoolId: import("mongoose").Types.ObjectId;
+        examTypeId: import("mongoose").Types.ObjectId;
+        markStructureId: import("mongoose").Types.ObjectId;
         normalization: import("mongoose").Types.DocumentArray<{
-            examKey: string;
-            from: number;
-            to: number;
+            examKey?: string | null | undefined;
+            from?: number | null | undefined;
+            to?: number | null | undefined;
         }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
-            examKey: string;
-            from: number;
-            to: number;
+            examKey?: string | null | undefined;
+            from?: number | null | undefined;
+            to?: number | null | undefined;
         }> & {
-            examKey: string;
-            from: number;
-            to: number;
+            examKey?: string | null | undefined;
+            from?: number | null | undefined;
+            to?: number | null | undefined;
         }>;
-        aggregation: {
-            type: "sum" | "average" | "weighted";
+        gradingSystemId?: import("mongoose").Types.ObjectId | null | undefined;
+        aggregation?: {
             examKeys: string[];
+            type?: "sum" | "average" | "weighted" | null | undefined;
             weights?: Map<string, number> | null | undefined;
-        };
-        passRules?: {
-            passPercentage: number;
-            failIfAnySubjectFail: boolean;
         } | null | undefined;
-        grading?: {
-            type: "percentage" | "gpa";
-            scale: import("mongoose").Types.DocumentArray<{
-                min: number;
-                label: string;
-                point?: number | null | undefined;
-            }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
-                min: number;
-                label: string;
-                point?: number | null | undefined;
-            }> & {
-                min: number;
-                label: string;
-                point?: number | null | undefined;
-            }>;
+        passRules?: {
+            passPercentage?: number | null | undefined;
+            failIfAnySubjectFail?: boolean | null | undefined;
         } | null | undefined;
     } & import("mongoose").DefaultTimestampProps & {
         _id: import("mongoose").Types.ObjectId;
     } & {
         __v: number;
     }>;
-    getActive(session: string, cls: number): Promise<(import("mongoose").FlattenMaps<{
+    getActive(schoolId: string, session: string, cls: number, examTypeId: string): Promise<(import("mongoose").FlattenMaps<{
+        isActive: boolean;
         session: string;
         version: number;
-        isActive: boolean;
         class: number;
-        exams: import("mongoose").Types.DocumentArray<{
-            required: boolean;
-            key: string;
-            label: string;
-            totalMarks: number;
-        }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
-            required: boolean;
-            key: string;
-            label: string;
-            totalMarks: number;
-        }> & {
-            required: boolean;
-            key: string;
-            label: string;
-            totalMarks: number;
-        }>;
+        schoolId: import("mongoose").Types.ObjectId;
+        examTypeId: import("mongoose").Types.ObjectId;
+        markStructureId: import("mongoose").Types.ObjectId;
         normalization: import("mongoose").Types.DocumentArray<{
-            examKey: string;
-            from: number;
-            to: number;
+            examKey?: string | null | undefined;
+            from?: number | null | undefined;
+            to?: number | null | undefined;
         }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
-            examKey: string;
-            from: number;
-            to: number;
+            examKey?: string | null | undefined;
+            from?: number | null | undefined;
+            to?: number | null | undefined;
         }> & {
-            examKey: string;
-            from: number;
-            to: number;
+            examKey?: string | null | undefined;
+            from?: number | null | undefined;
+            to?: number | null | undefined;
         }>;
-        aggregation: {
-            type: "sum" | "average" | "weighted";
+        gradingSystemId?: import("mongoose").Types.ObjectId | null | undefined;
+        aggregation?: {
             examKeys: string[];
+            type?: "sum" | "average" | "weighted" | null | undefined;
             weights?: {
                 clear: () => void;
                 delete: (key: string) => boolean;
@@ -175,26 +107,10 @@ export declare const ResultConfigService: {
                 [Symbol.iterator]: () => MapIterator<[string, number]>;
                 readonly [Symbol.toStringTag]: string;
             } | null | undefined;
-        };
-        passRules?: {
-            passPercentage: number;
-            failIfAnySubjectFail: boolean;
         } | null | undefined;
-        grading?: {
-            type: "percentage" | "gpa";
-            scale: import("mongoose").Types.DocumentArray<{
-                min: number;
-                label: string;
-                point?: number | null | undefined;
-            }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
-                min: number;
-                label: string;
-                point?: number | null | undefined;
-            }> & {
-                min: number;
-                label: string;
-                point?: number | null | undefined;
-            }>;
+        passRules?: {
+            passPercentage?: number | null | undefined;
+            failIfAnySubjectFail?: boolean | null | undefined;
         } | null | undefined;
         createdAt: NativeDate;
         updatedAt: NativeDate;
@@ -203,43 +119,31 @@ export declare const ResultConfigService: {
     } & {
         __v: number;
     }) | null>;
-    list(session?: string, cls?: number): Promise<(import("mongoose").FlattenMaps<{
+    list(query: any): Promise<(import("mongoose").FlattenMaps<{
+        isActive: boolean;
         session: string;
         version: number;
-        isActive: boolean;
         class: number;
-        exams: import("mongoose").Types.DocumentArray<{
-            required: boolean;
-            key: string;
-            label: string;
-            totalMarks: number;
-        }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
-            required: boolean;
-            key: string;
-            label: string;
-            totalMarks: number;
-        }> & {
-            required: boolean;
-            key: string;
-            label: string;
-            totalMarks: number;
-        }>;
+        schoolId: import("mongoose").Types.ObjectId;
+        examTypeId: import("mongoose").Types.ObjectId;
+        markStructureId: import("mongoose").Types.ObjectId;
         normalization: import("mongoose").Types.DocumentArray<{
-            examKey: string;
-            from: number;
-            to: number;
+            examKey?: string | null | undefined;
+            from?: number | null | undefined;
+            to?: number | null | undefined;
         }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
-            examKey: string;
-            from: number;
-            to: number;
+            examKey?: string | null | undefined;
+            from?: number | null | undefined;
+            to?: number | null | undefined;
         }> & {
-            examKey: string;
-            from: number;
-            to: number;
+            examKey?: string | null | undefined;
+            from?: number | null | undefined;
+            to?: number | null | undefined;
         }>;
-        aggregation: {
-            type: "sum" | "average" | "weighted";
+        gradingSystemId?: import("mongoose").Types.ObjectId | null | undefined;
+        aggregation?: {
             examKeys: string[];
+            type?: "sum" | "average" | "weighted" | null | undefined;
             weights?: {
                 clear: () => void;
                 delete: (key: string) => boolean;
@@ -254,26 +158,10 @@ export declare const ResultConfigService: {
                 [Symbol.iterator]: () => MapIterator<[string, number]>;
                 readonly [Symbol.toStringTag]: string;
             } | null | undefined;
-        };
-        passRules?: {
-            passPercentage: number;
-            failIfAnySubjectFail: boolean;
         } | null | undefined;
-        grading?: {
-            type: "percentage" | "gpa";
-            scale: import("mongoose").Types.DocumentArray<{
-                min: number;
-                label: string;
-                point?: number | null | undefined;
-            }, import("mongoose").Types.Subdocument<import("bson").ObjectId, any, {
-                min: number;
-                label: string;
-                point?: number | null | undefined;
-            }> & {
-                min: number;
-                label: string;
-                point?: number | null | undefined;
-            }>;
+        passRules?: {
+            passPercentage?: number | null | undefined;
+            failIfAnySubjectFail?: boolean | null | undefined;
         } | null | undefined;
         createdAt: NativeDate;
         updatedAt: NativeDate;

@@ -4,6 +4,7 @@ import winston from "winston";
 // Environment check
 const isVercel = process.env.VERCEL === "1";
 const isProduction = process.env.NODE_ENV === "production";
+const isLocal = !isVercel && process.env.NODE_ENV === "development";
 
 // কাস্টম ফরম্যাট
 const customFormat = winston.format.printf(
@@ -15,30 +16,29 @@ const customFormat = winston.format.printf(
 );
 
 // শুধু কনসোল ট্রান্সপোর্ট (Vercel এর জন্য)
-const consoleTransport = new winston.transports.Console({
-  format: winston.format.combine(
-    winston.format.colorize(),
-    winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
-    winston.format.errors({ stack: true }),
-    customFormat
-  ),
-});
+const transports: winston.transport[] = [
+  new winston.transports.Console({
+    format: winston.format.combine(
+      winston.format.colorize(),
+      winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+      winston.format.errors({ stack: true }),
+      customFormat
+    ),
+  }),
+];
 
-// লোকাল ডেভেলপমেন্টের জন্য ফাইল ট্রান্সপোর্ট
-const fileTransports = [];
-if (!isVercel && !isProduction) {
-  // লোকাল ডেভেলপমেন্টে শুধু ফাইল ট্রান্সপোর্ট যোগ করুন
+// লোকাল ডেভেলপমেন্টের জন্য ফাইল ট্রান্সপোর্ট (শুধু লোকাল)
+if (isLocal) {
   try {
     const fs = require("fs");
     const path = require("path");
 
-    // logs ফোল্ডার চেক/ক্রিয়েট করুন
     const logsDir = path.join(process.cwd(), "logs");
     if (!fs.existsSync(logsDir)) {
       fs.mkdirSync(logsDir, { recursive: true });
     }
 
-    fileTransports.push(
+    transports.push(
       new winston.transports.File({
         filename: path.join(logsDir, "error.log"),
         level: "error",
@@ -58,7 +58,6 @@ if (!isVercel && !isProduction) {
 
     console.log("📝 File logging enabled for development");
   } catch (error) {
-    // সমাধান: unknown টাইপ চেক করা
     if (error instanceof Error) {
       console.warn("⚠️ Could not create logs directory:", error.message);
     } else {
@@ -79,14 +78,13 @@ const logger = winston.createLogger({
     service: "school-erp-backend",
     environment: isVercel ? "vercel" : process.env.NODE_ENV || "development",
   },
-  transports: [consoleTransport, ...fileTransports],
+  transports,
 });
 
-// Vercel environment এ লগিং টেস্ট
 if (isVercel) {
-  logger.info("📡 Logger initialized in Vercel environment (console only)");
+  console.log("📡 Logger initialized in Vercel environment (console only)");
 } else {
-  logger.info(
+  console.log(
     `📝 Logger initialized in ${process.env.NODE_ENV || "development"} mode`
   );
 }

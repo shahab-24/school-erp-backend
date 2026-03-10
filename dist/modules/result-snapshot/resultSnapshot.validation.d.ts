@@ -28,6 +28,7 @@ export declare const publishSnapshotSchema: z.ZodObject<{
         percentage: z.ZodNumber;
         failed: z.ZodBoolean;
     }, "strip", z.ZodTypeAny, {
+        total: number;
         studentId: string;
         failed: boolean;
         academicRecordId: string;
@@ -37,9 +38,9 @@ export declare const publishSnapshotSchema: z.ZodObject<{
             final: number;
             failed?: boolean | undefined;
         }[];
-        total: number;
         percentage: number;
     }, {
+        total: number;
         studentId: string;
         failed: boolean;
         academicRecordId: string;
@@ -49,7 +50,6 @@ export declare const publishSnapshotSchema: z.ZodObject<{
             final: number;
             failed?: boolean | undefined;
         }[];
-        total: number;
         percentage: number;
     }>, "many">;
 }, "strip", z.ZodTypeAny, {
@@ -58,6 +58,7 @@ export declare const publishSnapshotSchema: z.ZodObject<{
     scope: "terminal" | "annual";
     resultConfigId: string;
     results: {
+        total: number;
         studentId: string;
         failed: boolean;
         academicRecordId: string;
@@ -67,7 +68,6 @@ export declare const publishSnapshotSchema: z.ZodObject<{
             final: number;
             failed?: boolean | undefined;
         }[];
-        total: number;
         percentage: number;
     }[];
     terminalKey?: string | undefined;
@@ -77,6 +77,7 @@ export declare const publishSnapshotSchema: z.ZodObject<{
     scope: "terminal" | "annual";
     resultConfigId: string;
     results: {
+        total: number;
         studentId: string;
         failed: boolean;
         academicRecordId: string;
@@ -86,7 +87,6 @@ export declare const publishSnapshotSchema: z.ZodObject<{
             final: number;
             failed?: boolean | undefined;
         }[];
-        total: number;
         percentage: number;
     }[];
     terminalKey?: string | undefined;

@@ -129,12 +129,6 @@ export declare const createResultConfigSchema: z.ZodObject<{
 }, "strip", z.ZodTypeAny, {
     session: string;
     class: number;
-    exams: {
-        key: string;
-        label: string;
-        totalMarks: number;
-        required?: boolean | undefined;
-    }[];
     normalization: {
         examKey: string;
         from: number;
@@ -145,6 +139,12 @@ export declare const createResultConfigSchema: z.ZodObject<{
         weights?: Record<string, number> | undefined;
         examKeys?: string[] | undefined;
     };
+    exams: {
+        key: string;
+        label: string;
+        totalMarks: number;
+        required?: boolean | undefined;
+    }[];
     passRules?: {
         passPercentage: number;
         failIfAnySubjectFail: boolean;
@@ -160,12 +160,6 @@ export declare const createResultConfigSchema: z.ZodObject<{
 }, {
     session: string;
     class: number;
-    exams: {
-        key: string;
-        label: string;
-        totalMarks: number;
-        required?: boolean | undefined;
-    }[];
     normalization: {
         examKey: string;
         from: number;
@@ -176,6 +170,12 @@ export declare const createResultConfigSchema: z.ZodObject<{
         weights?: Record<string, number> | undefined;
         examKeys?: string[] | undefined;
     };
+    exams: {
+        key: string;
+        label: string;
+        totalMarks: number;
+        required?: boolean | undefined;
+    }[];
     passRules?: {
         passPercentage: number;
         failIfAnySubjectFail: boolean;

@@ -1,21 +1,54 @@
+// src/modules/student/student.router.ts
 import { Router } from "express";
-
-
 import { auth } from "../../core/errors/middleware/auth";
 import { requireRole } from "../../core/errors/middleware/requireRole";
 import { StudentController } from "./student.controller";
 
 const router = Router();
 
-router.post("/", StudentController.create);
-router.get("/", StudentController.list);
-router.get("/:studentUid", StudentController.get);
-router.patch("/:studentUid/status", StudentController.updateStatus);
-router.post("/:studentUid/promote", StudentController.promote);
+/**
+ * 🔥 IMPORTANT:
+ * Static routes MUST be declared BEFORE dynamic :studentUid
+ */
 
+// ─── Static routes ────────────────────────────────────────────────
+router.get(
+  "/sessions",
+  auth(),
+  requireRole("SCHOOL_ADMIN", "TEACHER"),
+  StudentController.sessions
+);
 
+router.get(
+  "/classes",
+  auth(),
+  requireRole("SCHOOL_ADMIN", "TEACHER"),
+  StudentController.classes
+);
 
+router.get(
+  "/stats",
+  auth(),
+  requireRole("SCHOOL_ADMIN", "TEACHER"),
+  StudentController.stats
+);
 
+router.get(
+  "/roster",
+  auth(),
+  requireRole("SCHOOL_ADMIN", "TEACHER"),
+  StudentController.roster // ?class=5&session=2025
+);
+
+// ─── Bulk operations ──────────────────────────────────────────────
+router.post(
+  "/bulk-promote",
+  auth(),
+  requireRole("SCHOOL_ADMIN"),
+  StudentController.bulkPromote
+);
+
+// ─── Collection ───────────────────────────────────────────────────
 router.post("/", auth(), requireRole("SCHOOL_ADMIN"), StudentController.create);
 
 router.get(
@@ -25,6 +58,7 @@ router.get(
   StudentController.list
 );
 
+// ─── Single student ───────────────────────────────────────────────
 router.get(
   "/:studentUid",
   auth(),
@@ -47,10 +81,10 @@ router.post(
 );
 
 router.patch(
-  "/:studentUid/stipend-beneficiary",
+  "/:studentUid/image",
   auth(),
   requireRole("SCHOOL_ADMIN"),
-  StudentController.updateStipendBeneficiary
+  StudentController.updateImage
 );
 
 router.get(
@@ -60,8 +94,11 @@ router.get(
   StudentController.getStipendBeneficiary
 );
 
-
-
-
+router.patch(
+  "/:studentUid/stipend-beneficiary",
+  auth(),
+  requireRole("SCHOOL_ADMIN"),
+  StudentController.updateStipendBeneficiary
+);
 
 export default router;

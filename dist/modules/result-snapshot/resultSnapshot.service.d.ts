@@ -2,6 +2,7 @@ export declare const ResultSnapshotService: {
     publish(payload: any): Promise<import("mongoose").MergeType<import("mongoose").Document<unknown, {}, {
         session: string;
         class: number;
+        total: number;
         studentId: string;
         scope: "terminal" | "annual";
         publishedAt: NativeDate;
@@ -24,15 +25,15 @@ export declare const ResultSnapshotService: {
             final: number;
             failed: boolean;
         }>;
-        total: number;
         percentage: number;
-        terminalKey?: string | null | undefined;
         position?: number | null | undefined;
+        terminalKey?: string | null | undefined;
     } & import("mongoose").DefaultTimestampProps, {}, {
         timestamps: true;
     }> & {
         session: string;
         class: number;
+        total: number;
         studentId: string;
         scope: "terminal" | "annual";
         publishedAt: NativeDate;
@@ -55,10 +56,9 @@ export declare const ResultSnapshotService: {
             final: number;
             failed: boolean;
         }>;
-        total: number;
         percentage: number;
-        terminalKey?: string | null | undefined;
         position?: number | null | undefined;
+        terminalKey?: string | null | undefined;
     } & import("mongoose").DefaultTimestampProps & {
         _id: import("mongoose").Types.ObjectId;
     } & {
@@ -72,6 +72,7 @@ export declare const ResultSnapshotService: {
     }): Promise<(import("mongoose").FlattenMaps<{
         session: string;
         class: number;
+        total: number;
         studentId: string;
         scope: "terminal" | "annual";
         publishedAt: NativeDate;
@@ -133,10 +134,9 @@ export declare const ResultSnapshotService: {
             final: number;
             failed: boolean;
         }>;
-        total: number;
         percentage: number;
-        terminalKey?: string | null | undefined;
         position?: number | null | undefined;
+        terminalKey?: string | null | undefined;
         createdAt: NativeDate;
         updatedAt: NativeDate;
     }> & {
@@ -152,6 +152,7 @@ export declare const ResultSnapshotService: {
     }): Promise<(import("mongoose").FlattenMaps<{
         session: string;
         class: number;
+        total: number;
         studentId: string;
         scope: "terminal" | "annual";
         publishedAt: NativeDate;
@@ -213,10 +214,9 @@ export declare const ResultSnapshotService: {
             final: number;
             failed: boolean;
         }>;
-        total: number;
         percentage: number;
-        terminalKey?: string | null | undefined;
         position?: number | null | undefined;
+        terminalKey?: string | null | undefined;
         createdAt: NativeDate;
         updatedAt: NativeDate;
     }> & {

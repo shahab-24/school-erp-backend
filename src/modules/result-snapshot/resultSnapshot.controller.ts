@@ -5,31 +5,60 @@ import { ResultSnapshotService } from "./resultSnapshot.service";
 export const ResultSnapshotController = {
   async publish(req: Request, res: Response) {
     const parsed = publishSnapshotSchema.parse(req.body);
+
     const created = await ResultSnapshotService.publish(parsed);
-    res.status(201).json({ count: created.length });
+
+    res.status(201).json({
+      count: created.length,
+    });
   },
 
+
+  
+
   async classList(req: Request, res: Response) {
-    const { scope, terminalKey, session, class: cls } = req.query as any;
-    const list = await ResultSnapshotService.listByClass({
+    const {
+      schoolId,
       scope,
       terminalKey,
       session,
+      class: cls,
+    } = req.query as any;
+
+    const list = await ResultSnapshotService.listByClass({
+      schoolId,
+
+      scope,
+
+      terminalKey,
+
+      session,
+
       class: Number(cls),
     });
+
     res.json(list);
   },
 
   async student(req: Request, res: Response) {
     const { studentId } = req.params;
-    const { scope, terminalKey, session } = req.query as any;
+
+    const { schoolId, scope, terminalKey, session } = req.query as any;
+
     const doc = await ResultSnapshotService.getStudent({
+      schoolId,
+
       studentId,
+
       scope,
+
       terminalKey,
+
       session,
     });
+
     if (!doc) return res.status(404).json({ message: "Not found" });
+
     res.json(doc);
   },
 };

@@ -1,58 +1,75 @@
-// src/modules/auth/auth.controller.ts - FIXED VERSION
 import { Request, Response } from "express";
 import { loginSchema } from "./auth.validation";
-import { AuthService } from "./auth.service";
+import { AuthRequest } from "./auth.middleware";
+import { User } from "./auth.model";
+import { AuthService, generateTokens } from "./auth.service";
 
 export const AuthController = {
-  
   async login(req: Request, res: Response) {
-    console.log("🔥 LOGIN ROUTE HIT");
     try {
-      console.log("🔐 Login request received");
-
-      // 1. Validate input
       const { email, password } = loginSchema.parse(req.body);
 
-      // 2. Call service
       const data = await AuthService.login(email, password);
 
-      // 3. Return success response
-      res.json({
-        ...data,
-        timestamp: new Date().toISOString(),
+      const { accessToken, refreshToken } = generateTokens({
+        userId: data.user.id,
+        role: data.user.role,
+        email: data.user.email,
       });
-    } catch (error: any) {
-      console.error("❌ Login controller error:", error);
 
-      // Handle different error types
-      let statusCode = 400;
-      let message = "Login failed";
+      res.cookie("token", accessToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: 15 * 60 * 1000,
+      });
 
-      if (error.name === "ZodError") {
-        message = "Invalid input format";
-      } else if (error.message.includes("credentials")) {
-        statusCode = 401;
-        message = error.message;
-      } else if (error.message.includes("required")) {
-        statusCode = 400;
-        message = error.message;
-      }
+      res.cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      });
 
-      res.status(statusCode).json({
+      res.json({
+        success: true,
+        user: data.user,
+      });
+    } catch (error) {
+      res.status(401).json({
         success: false,
-        message,
-        timestamp: new Date().toISOString(),
-        // Only show error details in development
-        ...(process.env.NODE_ENV === "development" && { error: error.message }),
+        message: "Invalid credentials",
       });
     }
   },
 
+  async logout(req: AuthRequest, res: Response) {
+    res.clearCookie("token");
+    res.clearCookie("refreshToken");
 
- async me(req: Request, res: Response) {
     res.json({
       success: true,
-      user: (req as any).user,
-    })
- 
-}}
+    });
+  },
+
+  async me(req: AuthRequest, res: Response) {
+    if (!req.user) {
+      return res.status(401).json({
+        success: false,
+        message: "Not authenticated",
+      });
+    }
+
+    const user = await User.findById(req.user.userId).select("-passwordHash");
+
+    res.json({
+      success: true,
+      user,
+    });
+  },
+  async csrf(req: Request, res: Response) {
+    res.json({
+      csrfToken: req.csrfToken(),
+    });
+  },
+};
