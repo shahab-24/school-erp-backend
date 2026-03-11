@@ -67,6 +67,7 @@ export const AuthController = {
       user,
     });
   },
+  
   async csrf(req: Request, res: Response) {
     res.json({
       csrfToken: req.csrfToken(),

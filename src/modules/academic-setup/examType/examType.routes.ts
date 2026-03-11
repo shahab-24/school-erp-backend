@@ -3,8 +3,10 @@ import { ExamTypeController } from "./examType.controller";
 
 const router = Router();
 
-router.post("/", ExamTypeController.create);
-
 router.get("/", ExamTypeController.list);
+router.post("/", ExamTypeController.create);
+router.patch("/:id", ExamTypeController.update);
+router.patch("/:id/toggle", ExamTypeController.toggle);
+router.delete("/:id", ExamTypeController.remove);
 
 export default router;

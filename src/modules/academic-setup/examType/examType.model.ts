@@ -1,23 +1,27 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Document } from "mongoose";
 
-const ExamTypeSchema = new Schema(
+export interface IExamType extends Document {
+  name: string;
+  code: string;
+  order: number;
+  isActive: boolean;
+}
+
+const ExamTypeSchema = new Schema<IExamType>(
   {
-    schoolId: {
-      type: Schema.Types.ObjectId,
-      required: true,
-      index: true,
-    },
-
     name: {
       type: String,
       required: true,
       trim: true,
+      maxlength: 100,
     },
 
     code: {
       type: String,
       required: true,
       trim: true,
+      uppercase: true,
+      maxlength: 20,
     },
 
     order: {
@@ -30,15 +34,11 @@ const ExamTypeSchema = new Schema(
       default: true,
     },
   },
-  { timestamps: true }
-);
-
-ExamTypeSchema.index(
   {
-    schoolId: 1,
-    code: 1,
-  },
-  { unique: true }
+    timestamps: true,
+  }
 );
 
-export const ExamType = model("ExamType", ExamTypeSchema);
+ExamTypeSchema.index({ code: 1 }, { unique: true });
+
+export const ExamType = model<IExamType>("ExamType", ExamTypeSchema);
