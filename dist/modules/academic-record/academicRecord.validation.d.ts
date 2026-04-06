@@ -1,6 +1,7 @@
 import { z } from "zod";
 export declare const marksSchema: z.ZodRecord<z.ZodString, z.ZodRecord<z.ZodString, z.ZodNumber>>;
-export declare const upsertRecordSchema: z.ZodObject<{
+export declare const upsertRecordSchema: z.ZodEffects<z.ZodObject<{
+    schoolId: z.ZodString;
     studentId: z.ZodString;
     session: z.ZodString;
     class: z.ZodNumber;
@@ -10,6 +11,7 @@ export declare const upsertRecordSchema: z.ZodObject<{
 }, "strip", z.ZodTypeAny, {
     session: string;
     class: number;
+    schoolId: string;
     studentId: string;
     scope: "terminal" | "annual";
     marks: Record<string, Record<string, number>>;
@@ -17,6 +19,23 @@ export declare const upsertRecordSchema: z.ZodObject<{
 }, {
     session: string;
     class: number;
+    schoolId: string;
+    studentId: string;
+    scope: "terminal" | "annual";
+    marks: Record<string, Record<string, number>>;
+    terminalKey?: string | undefined;
+}>, {
+    session: string;
+    class: number;
+    schoolId: string;
+    studentId: string;
+    scope: "terminal" | "annual";
+    marks: Record<string, Record<string, number>>;
+    terminalKey?: string | undefined;
+}, {
+    session: string;
+    class: number;
+    schoolId: string;
     studentId: string;
     scope: "terminal" | "annual";
     marks: Record<string, Record<string, number>>;

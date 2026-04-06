@@ -1,24 +1,33 @@
 export type AggregationType = "sum" | "average" | "weighted";
-export interface ExamDef {
+export interface ExamComponent {
     key: string;
     label: string;
     totalMarks: number;
     required?: boolean;
 }
-export interface NormalizationRule {
-    examKey: string;
-    from: number;
-    to: number;
+export interface MarkStructureDTO {
+    components: ExamComponent[];
 }
-export interface AggregationRule {
-    type: AggregationType;
-    examKeys?: string[];
-    weights?: Record<string, number>;
+export interface GradingScale {
+    min: number;
+    label: string;
+    point?: number;
+}
+export interface GradingSystemDTO {
+    type: "percentage" | "gpa";
+    scale: GradingScale[];
 }
 export interface ResultConfigDTO {
-    exams: ExamDef[];
-    normalization: NormalizationRule[];
-    aggregation: AggregationRule;
+    normalization: {
+        examKey: string;
+        from: number;
+        to: number;
+    }[];
+    aggregation: {
+        type: AggregationType;
+        examKeys?: string[];
+        weights?: Record<string, number>;
+    };
     passRules?: {
         passPercentage?: number;
         failIfAnySubjectFail?: boolean;
@@ -29,14 +38,6 @@ export interface AcademicRecordDTO {
     session: string;
     class: number;
     marks: Record<string, Record<string, number>>;
-}
-export interface SubjectDef {
-    subjectId: string;
-    isOptional?: boolean;
-}
-export interface EngineOptions {
-    scope: "terminal" | "annual";
-    terminalKeyPrefix?: string;
 }
 export interface SubjectResult {
     normalized: Record<string, number>;

@@ -3,4 +3,10 @@ export declare function publishAndGenerateResult(query: any, actor: {
     role: string;
 }): Promise<{
     success: boolean;
+    message: string;
+    data: {
+        studentId: string;
+        session: string;
+        class: number;
+    };
 }>;

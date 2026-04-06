@@ -3,6 +3,7 @@ export declare const ResultSnapshotService: {
         session: string;
         class: number;
         total: number;
+        schoolId: import("mongoose").Types.ObjectId;
         studentId: string;
         scope: "terminal" | "annual";
         publishedAt: NativeDate;
@@ -34,6 +35,7 @@ export declare const ResultSnapshotService: {
         session: string;
         class: number;
         total: number;
+        schoolId: import("mongoose").Types.ObjectId;
         studentId: string;
         scope: "terminal" | "annual";
         publishedAt: NativeDate;
@@ -64,7 +66,9 @@ export declare const ResultSnapshotService: {
     } & {
         __v: number;
     }, Omit<any, "_id">>[]>;
+    updateRanking(schoolId: string, scope: "terminal" | "annual", session: string, classNo: number, terminalKey?: string): Promise<void>;
     listByClass(params: {
+        schoolId: string;
         scope: "terminal" | "annual";
         terminalKey?: string;
         session: string;
@@ -73,6 +77,7 @@ export declare const ResultSnapshotService: {
         session: string;
         class: number;
         total: number;
+        schoolId: import("mongoose").Types.ObjectId;
         studentId: string;
         scope: "terminal" | "annual";
         publishedAt: NativeDate;
@@ -145,6 +150,7 @@ export declare const ResultSnapshotService: {
         __v: number;
     })[]>;
     getStudent(params: {
+        schoolId: string;
         studentId: string;
         scope: "terminal" | "annual";
         terminalKey?: string;
@@ -153,6 +159,7 @@ export declare const ResultSnapshotService: {
         session: string;
         class: number;
         total: number;
+        schoolId: import("mongoose").Types.ObjectId;
         studentId: string;
         scope: "terminal" | "annual";
         publishedAt: NativeDate;

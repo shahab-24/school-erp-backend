@@ -3,7 +3,7 @@ import type { IStudent } from "./student.model";
 export declare const StudentService: {
     create(payload: CreateStudentDTO): Promise<IStudent>;
     list(query: ListStudentsQuery): Promise<PaginatedResult<IStudent>>;
-    getByUid(studentUid: string): Promise<IStudent | null>;
+    getByUid(studentUid: string): Promise<IStudent>;
     updateStatus(studentUid: string, status: string): Promise<IStudent>;
     promote(studentUid: string, entry: PromoteDTO): Promise<IStudent>;
     bulkPromote(payload: {

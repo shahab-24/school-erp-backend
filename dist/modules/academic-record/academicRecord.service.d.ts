@@ -1,73 +1,104 @@
+import mongoose from "mongoose";
+interface UpsertDraftPayload {
+    schoolId: string;
+    studentId: string;
+    session: string;
+    class: number;
+    scope: "terminal" | "annual";
+    terminalKey?: string;
+    marks: Record<string, Record<string, number>>;
+}
+interface QueryFilter {
+    schoolId?: mongoose.Types.ObjectId;
+    studentId?: string;
+    session?: string;
+    class?: number;
+    scope?: "terminal" | "annual";
+    terminalKey?: string;
+    status?: "DRAFT" | "SUBMITTED" | "PUBLISHED";
+}
 export declare const AcademicRecordService: {
-    upsertDraft(payload: any): Promise<import("mongoose").FlattenMaps<{
-        status: "DRAFT" | "SUBMITTED" | "PUBLISHED";
-        session: string;
-        class: number;
-        studentId: string;
-        scope: "terminal" | "annual";
-        marks: {};
-        terminalKey?: string | null | undefined;
-        submittedAt?: NativeDate | null | undefined;
-        publishedAt?: NativeDate | null | undefined;
-        createdAt: NativeDate;
-        updatedAt: NativeDate;
-    }> & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
-        __v: number;
-    }>;
-    submit(q: any): Promise<(import("mongoose").FlattenMaps<{
-        status: "DRAFT" | "SUBMITTED" | "PUBLISHED";
-        session: string;
-        class: number;
-        studentId: string;
-        scope: "terminal" | "annual";
-        marks: {};
-        terminalKey?: string | null | undefined;
-        submittedAt?: NativeDate | null | undefined;
-        publishedAt?: NativeDate | null | undefined;
-        createdAt: NativeDate;
-        updatedAt: NativeDate;
-    }> & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
-        __v: number;
-    }) | null>;
-    unlock(q: any): Promise<(import("mongoose").FlattenMaps<{
-        status: "DRAFT" | "SUBMITTED" | "PUBLISHED";
-        session: string;
-        class: number;
-        studentId: string;
-        scope: "terminal" | "annual";
-        marks: {};
-        terminalKey?: string | null | undefined;
-        submittedAt?: NativeDate | null | undefined;
-        publishedAt?: NativeDate | null | undefined;
-        createdAt: NativeDate;
-        updatedAt: NativeDate;
-    }> & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
-        __v: number;
-    }) | null>;
-    publish(query: any, actor: any): Promise<{
+    /**
+     * Create or update draft record
+     */
+    upsertDraft(payload: UpsertDraftPayload): Promise<{
         success: boolean;
+        data: mongoose.FlattenMaps<import("./academicRecord.model").IAcademicRecord> & Required<{
+            _id: mongoose.Types.ObjectId;
+        }> & {
+            __v: number;
+        };
+        message: string;
     }>;
-    listByClass(filter: any): Promise<(import("mongoose").FlattenMaps<{
-        status: "DRAFT" | "SUBMITTED" | "PUBLISHED";
-        session: string;
-        class: number;
-        studentId: string;
-        scope: "terminal" | "annual";
-        marks: {};
-        terminalKey?: string | null | undefined;
-        submittedAt?: NativeDate | null | undefined;
-        publishedAt?: NativeDate | null | undefined;
-        createdAt: NativeDate;
-        updatedAt: NativeDate;
-    }> & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
-        __v: number;
-    })[]>;
+    /**
+     * Submit draft
+     */
+    submit(query: QueryFilter): Promise<{
+        success: boolean;
+        data: mongoose.FlattenMaps<import("./academicRecord.model").IAcademicRecord> & Required<{
+            _id: mongoose.Types.ObjectId;
+        }> & {
+            __v: number;
+        };
+        message: string;
+    }>;
+    /**
+     * Unlock submitted record
+     */
+    unlock(query: QueryFilter): Promise<{
+        success: boolean;
+        data: mongoose.FlattenMaps<import("./academicRecord.model").IAcademicRecord> & Required<{
+            _id: mongoose.Types.ObjectId;
+        }> & {
+            __v: number;
+        };
+        message: string;
+    }>;
+    /**
+     * Publish record + generate result
+     */
+    publish(query: QueryFilter, actor: {
+        userId: string;
+        role: string;
+    }): Promise<{
+        success: boolean;
+        message: string;
+        data: {
+            studentId: string;
+            session: string;
+            class: number;
+        };
+    }>;
+    /**
+     * List records
+     */
+    listByClass(filter: QueryFilter, options?: {
+        page?: number;
+        limit?: number;
+    }): Promise<{
+        success: boolean;
+        data: (mongoose.FlattenMaps<import("./academicRecord.model").IAcademicRecord> & Required<{
+            _id: mongoose.Types.ObjectId;
+        }> & {
+            __v: number;
+        })[];
+        meta: {
+            total: number;
+            page: number;
+            limit: number;
+            pages: number;
+        };
+    }>;
+    /**
+     * Get record by id
+     */
+    getById(id: string, schoolId: mongoose.Types.ObjectId): Promise<{
+        success: boolean;
+        data: mongoose.FlattenMaps<import("./academicRecord.model").IAcademicRecord> & Required<{
+            _id: mongoose.Types.ObjectId;
+        }> & {
+            __v: number;
+        };
+    }>;
 };
+export {};

@@ -1,5 +1,6 @@
 import { z } from "zod";
-export declare const publishSnapshotSchema: z.ZodObject<{
+export declare const publishSnapshotSchema: z.ZodEffects<z.ZodObject<{
+    schoolId: z.ZodString;
     scope: z.ZodEnum<["terminal", "annual"]>;
     terminalKey: z.ZodOptional<z.ZodString>;
     session: z.ZodString;
@@ -55,6 +56,7 @@ export declare const publishSnapshotSchema: z.ZodObject<{
 }, "strip", z.ZodTypeAny, {
     session: string;
     class: number;
+    schoolId: string;
     scope: "terminal" | "annual";
     resultConfigId: string;
     results: {
@@ -74,6 +76,47 @@ export declare const publishSnapshotSchema: z.ZodObject<{
 }, {
     session: string;
     class: number;
+    schoolId: string;
+    scope: "terminal" | "annual";
+    resultConfigId: string;
+    results: {
+        total: number;
+        studentId: string;
+        failed: boolean;
+        academicRecordId: string;
+        subjects: {
+            subjectId: string;
+            normalized: Record<string, number>;
+            final: number;
+            failed?: boolean | undefined;
+        }[];
+        percentage: number;
+    }[];
+    terminalKey?: string | undefined;
+}>, {
+    session: string;
+    class: number;
+    schoolId: string;
+    scope: "terminal" | "annual";
+    resultConfigId: string;
+    results: {
+        total: number;
+        studentId: string;
+        failed: boolean;
+        academicRecordId: string;
+        subjects: {
+            subjectId: string;
+            normalized: Record<string, number>;
+            final: number;
+            failed?: boolean | undefined;
+        }[];
+        percentage: number;
+    }[];
+    terminalKey?: string | undefined;
+}, {
+    session: string;
+    class: number;
+    schoolId: string;
     scope: "terminal" | "annual";
     resultConfigId: string;
     results: {

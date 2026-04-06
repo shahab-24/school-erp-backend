@@ -7,11 +7,14 @@ exports.ResultSnapshotController = {
     async publish(req, res) {
         const parsed = resultSnapshot_validation_1.publishSnapshotSchema.parse(req.body);
         const created = await resultSnapshot_service_1.ResultSnapshotService.publish(parsed);
-        res.status(201).json({ count: created.length });
+        res.status(201).json({
+            count: created.length,
+        });
     },
     async classList(req, res) {
-        const { scope, terminalKey, session, class: cls } = req.query;
+        const { schoolId, scope, terminalKey, session, class: cls, } = req.query;
         const list = await resultSnapshot_service_1.ResultSnapshotService.listByClass({
+            schoolId,
             scope,
             terminalKey,
             session,
@@ -21,8 +24,9 @@ exports.ResultSnapshotController = {
     },
     async student(req, res) {
         const { studentId } = req.params;
-        const { scope, terminalKey, session } = req.query;
+        const { schoolId, scope, terminalKey, session } = req.query;
         const doc = await resultSnapshot_service_1.ResultSnapshotService.getStudent({
+            schoolId,
             studentId,
             scope,
             terminalKey,

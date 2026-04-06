@@ -1,4 +1,5 @@
 "use strict";
+// src/modules/result-config/resultConfig.controller.ts
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ResultConfigController = void 0;
 const resultConfig_validation_1 = require("./resultConfig.validation");
@@ -12,15 +13,25 @@ exports.ResultConfigController = {
     async active(req, res) {
         const session = String(req.query.session);
         const cls = Number(req.query.class);
-        const cfg = await resultConfig_service_1.ResultConfigService.getActive(session, cls);
-        if (!cfg)
-            return res.status(404).json({ message: "No active config" });
+        const examTypeId = String(req.query.examTypeId);
+        const cfg = await resultConfig_service_1.ResultConfigService.getActive(session, cls, examTypeId);
+        if (!cfg) {
+            return res.status(404).json({ message: "No active config found" });
+        }
         res.json(cfg);
     },
     async list(req, res) {
-        const session = req.query.session?.toString();
-        const cls = req.query.class ? Number(req.query.class) : undefined;
-        const list = await resultConfig_service_1.ResultConfigService.list(session, cls);
+        const query = {};
+        if (req.query.session) {
+            query.session = req.query.session.toString();
+        }
+        if (req.query.class) {
+            query.class = Number(req.query.class);
+        }
+        if (req.query.examTypeId) {
+            query.examTypeId = req.query.examTypeId.toString();
+        }
+        const list = await resultConfig_service_1.ResultConfigService.list(query);
         res.json(list);
     },
 };

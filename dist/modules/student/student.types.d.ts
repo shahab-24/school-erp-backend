@@ -100,6 +100,9 @@ export interface ListStudentsQuery {
     session?: string;
     gender?: Gender;
     status?: StudentStatus;
+    religion?: string;
+    ageMin?: number;
+    ageMax?: number;
     page?: number;
     limit?: number;
     sortBy?: "name" | "roll" | "class" | "createdAt";

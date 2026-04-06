@@ -33,27 +33,21 @@ function aggregate(values, cfg) {
     }
     throw new resultEngine_errors_1.ResultEngineError("Unknown aggregation type");
 }
-function calculateResults(records, cfg, options) {
-    (0, resultEngine_validator_1.validateConfig)(cfg);
+function calculateResults(records, cfg, structure) {
+    (0, resultEngine_validator_1.validateConfig)(cfg, structure);
     const normMap = new Map(cfg.normalization.map((n) => [n.examKey, n]));
-    const maxTotal = cfg.exams.reduce((s, e) => s + (normMap.get(e.key)?.to ?? 0), 0);
+    const maxTotal = structure.components.reduce((s, c) => s + (normMap.get(c.key)?.to ?? 0), 0);
     const results = [];
     for (const rec of records) {
-        (0, resultEngine_validator_1.validateRecordAgainstConfig)(rec, cfg);
         const subjectsOut = {};
         let studentTotal = 0;
         let anySubjectFail = false;
         for (const [subjectId, exams] of Object.entries(rec.marks)) {
             const normalized = {};
             for (const [examKey, obtained] of Object.entries(exams)) {
-                // terminal-aware filter (optional)
-                if (options.scope === "terminal" && options.terminalKeyPrefix) {
-                    if (!examKey.startsWith(options.terminalKeyPrefix))
-                        continue;
-                }
                 const n = normMap.get(examKey);
                 if (!n)
-                    continue; // exam not contributing to this config
+                    continue;
                 normalized[examKey] = normalize(obtained, n.from, n.to);
             }
             const final = aggregate(normalized, cfg);
@@ -62,7 +56,11 @@ function calculateResults(records, cfg, options) {
                 : false;
             if (failed)
                 anySubjectFail = true;
-            subjectsOut[subjectId] = { normalized, final, failed };
+            subjectsOut[subjectId] = {
+                normalized,
+                final,
+                failed,
+            };
             studentTotal += final;
         }
         const percentage = maxTotal > 0 ? (studentTotal / maxTotal) * 100 : 0;

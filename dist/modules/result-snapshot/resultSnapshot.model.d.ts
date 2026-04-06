@@ -3,6 +3,7 @@ export declare const ResultSnapshot: import("mongoose").Model<{
     session: string;
     class: number;
     total: number;
+    schoolId: import("mongoose").Types.ObjectId;
     studentId: string;
     scope: "terminal" | "annual";
     publishedAt: NativeDate;
@@ -32,6 +33,7 @@ export declare const ResultSnapshot: import("mongoose").Model<{
     session: string;
     class: number;
     total: number;
+    schoolId: import("mongoose").Types.ObjectId;
     studentId: string;
     scope: "terminal" | "annual";
     publishedAt: NativeDate;
@@ -63,6 +65,7 @@ export declare const ResultSnapshot: import("mongoose").Model<{
     session: string;
     class: number;
     total: number;
+    schoolId: import("mongoose").Types.ObjectId;
     studentId: string;
     scope: "terminal" | "annual";
     publishedAt: NativeDate;
@@ -98,6 +101,7 @@ export declare const ResultSnapshot: import("mongoose").Model<{
     session: string;
     class: number;
     total: number;
+    schoolId: import("mongoose").Types.ObjectId;
     studentId: string;
     scope: "terminal" | "annual";
     publishedAt: NativeDate;
@@ -127,6 +131,7 @@ export declare const ResultSnapshot: import("mongoose").Model<{
     session: string;
     class: number;
     total: number;
+    schoolId: import("mongoose").Types.ObjectId;
     studentId: string;
     scope: "terminal" | "annual";
     publishedAt: NativeDate;
@@ -158,6 +163,7 @@ export declare const ResultSnapshot: import("mongoose").Model<{
     session: string;
     class: number;
     total: number;
+    schoolId: import("mongoose").Types.ObjectId;
     studentId: string;
     scope: "terminal" | "annual";
     publishedAt: NativeDate;

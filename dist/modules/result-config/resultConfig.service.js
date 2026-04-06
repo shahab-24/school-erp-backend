@@ -1,18 +1,19 @@
 "use strict";
+// src/modules/result-config/resultConfig.service.ts
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ResultConfigService = void 0;
 const resultConfig_model_1 = require("./resultConfig.model");
 exports.ResultConfigService = {
     async create(payload) {
+        // deactivate previous active config
         await resultConfig_model_1.ResultConfig.updateMany({
-            schoolId: payload.schoolId,
             session: payload.session,
             class: payload.class,
             examTypeId: payload.examTypeId,
             isActive: true,
         }, { $set: { isActive: false } });
+        // find last version
         const last = await resultConfig_model_1.ResultConfig.findOne({
-            schoolId: payload.schoolId,
             session: payload.session,
             class: payload.class,
             examTypeId: payload.examTypeId,
@@ -26,9 +27,8 @@ exports.ResultConfigService = {
             isActive: true,
         });
     },
-    async getActive(schoolId, session, cls, examTypeId) {
+    async getActive(session, cls, examTypeId) {
         return resultConfig_model_1.ResultConfig.findOne({
-            schoolId,
             session,
             class: cls,
             examTypeId,
