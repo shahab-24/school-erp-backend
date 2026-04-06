@@ -10,4 +10,3 @@ exports.BulkController = {
         await bulk_service_1.BulkService.generateClassIdCardsZip({ class: Number(cls), session }, res);
     },
 };
-//# sourceMappingURL=bulk.controller.js.map

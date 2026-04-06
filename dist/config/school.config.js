@@ -8,4 +8,3 @@ exports.schoolConfig = {
     phone: process.env.SCHOOL_PHONE,
     address: process.env.SCHOOL_ADDRESS,
 };
-//# sourceMappingURL=school.config.js.map

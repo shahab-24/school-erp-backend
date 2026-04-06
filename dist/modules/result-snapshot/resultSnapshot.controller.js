@@ -37,4 +37,3 @@ exports.ResultSnapshotController = {
         res.json(doc);
     },
 };
-//# sourceMappingURL=resultSnapshot.controller.js.map

@@ -75,4 +75,3 @@ function calculateResults(records, cfg, structure) {
     }
     return results;
 }
-//# sourceMappingURL=resultEngine.js.map

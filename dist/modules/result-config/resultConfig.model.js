@@ -89,4 +89,3 @@ ResultConfigSchema.index({
     version: 1,
 }, { unique: true });
 exports.ResultConfig = (0, mongoose_1.model)("ResultConfig", ResultConfigSchema);
-//# sourceMappingURL=resultConfig.model.js.map

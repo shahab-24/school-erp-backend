@@ -39,4 +39,3 @@ exports.ResultConfigService = {
         return resultConfig_model_1.ResultConfig.find(query).sort({ createdAt: -1 }).lean();
     },
 };
-//# sourceMappingURL=resultConfig.service.js.map

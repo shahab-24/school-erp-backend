@@ -40,4 +40,3 @@ exports.BulkService = {
         await archive.finalize();
     },
 };
-//# sourceMappingURL=bulk.service.js.map

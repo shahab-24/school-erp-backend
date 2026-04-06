@@ -43,4 +43,3 @@ const UserSchema = new mongoose_1.Schema({
     },
 });
 exports.User = (0, mongoose_1.model)("User", UserSchema);
-//# sourceMappingURL=auth.model.js.map

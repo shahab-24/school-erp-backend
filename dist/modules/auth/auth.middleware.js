@@ -33,4 +33,3 @@ const authenticate = () => {
     };
 };
 exports.authenticate = authenticate;
-//# sourceMappingURL=auth.middleware.js.map

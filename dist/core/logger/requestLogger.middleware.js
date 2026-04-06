@@ -12,4 +12,3 @@ function requestLogger(req, _res, next) {
     }, "Incoming request");
     next();
 }
-//# sourceMappingURL=requestLogger.middleware.js.map

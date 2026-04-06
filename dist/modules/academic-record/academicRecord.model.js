@@ -71,4 +71,3 @@ AcademicRecordSchema.index({
 AcademicRecordSchema.index({ status: 1, schoolId: 1 });
 AcademicRecordSchema.index({ session: 1, class: 1, status: 1 });
 exports.AcademicRecord = (0, mongoose_1.model)("AcademicRecord", AcademicRecordSchema);
-//# sourceMappingURL=academicRecord.model.js.map

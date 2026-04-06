@@ -31,4 +31,3 @@ function renderIDCardBack(data) {
 </body>
 </html>`;
 }
-//# sourceMappingURL=idCard.back.html.js.map

@@ -35,4 +35,3 @@ exports.ResultConfigController = {
         res.json(list);
     },
 };
-//# sourceMappingURL=resultConfig.controller.js.map

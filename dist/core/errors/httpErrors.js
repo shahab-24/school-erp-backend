@@ -38,4 +38,3 @@ class ConflictError extends HttpError {
     }
 }
 exports.ConflictError = ConflictError;
-//# sourceMappingURL=httpErrors.js.map

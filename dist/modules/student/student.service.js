@@ -559,4 +559,3 @@ exports.StudentService = {
         return { total, byGender, byStatus, byClass };
     },
 };
-//# sourceMappingURL=student.service.js.map

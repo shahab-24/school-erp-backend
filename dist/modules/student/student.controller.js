@@ -123,4 +123,3 @@ exports.StudentController = {
         res.json({ success: true, data: { imageUrl: student.imageUrl } });
     }),
 };
-//# sourceMappingURL=student.controller.js.map

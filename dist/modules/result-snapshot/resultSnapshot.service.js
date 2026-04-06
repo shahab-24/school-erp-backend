@@ -66,4 +66,3 @@ exports.ResultSnapshotService = {
         return resultSnapshot_model_1.ResultSnapshot.findOne(q).lean();
     },
 };
-//# sourceMappingURL=resultSnapshot.service.js.map

@@ -85,4 +85,3 @@ exports.default = {
     // connectDB,
     validateEnvironment: exports.validateEnvironment,
 };
-//# sourceMappingURL=index.js.map

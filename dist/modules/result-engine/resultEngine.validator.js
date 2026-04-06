@@ -21,4 +21,3 @@ function validateConfig(cfg, structure) {
         }
     }
 }
-//# sourceMappingURL=resultEngine.validator.js.map

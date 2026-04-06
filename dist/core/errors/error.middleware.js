@@ -8,4 +8,3 @@ function errorHandler(err, req, res, next) {
         message: err.message || "Something went wrong",
     });
 }
-//# sourceMappingURL=error.middleware.js.map

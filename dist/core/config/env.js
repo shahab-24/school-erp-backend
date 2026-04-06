@@ -20,4 +20,3 @@ const envSchema = zod_1.z.object({
     JWT_EXPIRES_IN: zod_1.z.string().optional(),
 });
 exports.env = envSchema.parse(process.env);
-//# sourceMappingURL=env.js.map

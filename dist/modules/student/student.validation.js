@@ -182,4 +182,3 @@ exports.imageUploadSchema = zod_1.z.object({
     imageUrl: zod_1.z.string().url(),
     cloudinaryPublicId: zod_1.z.string().optional(),
 });
-//# sourceMappingURL=student.validation.js.map

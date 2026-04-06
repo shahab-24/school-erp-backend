@@ -24,4 +24,3 @@ exports.ResultSheetController = {
         res.json(sheet);
     },
 };
-//# sourceMappingURL=resultSheet.controller.js.map

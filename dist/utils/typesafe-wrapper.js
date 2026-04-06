@@ -59,4 +59,3 @@ function safeNumber(value) {
     const num = Number(value);
     return isNaN(num) ? undefined : num;
 }
-//# sourceMappingURL=typesafe-wrapper.js.map

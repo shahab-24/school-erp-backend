@@ -120,4 +120,3 @@ async function publishAndGenerateResult(query, actor) {
         session.endSession();
     }
 }
-//# sourceMappingURL=academicRecord.publisher.js.map

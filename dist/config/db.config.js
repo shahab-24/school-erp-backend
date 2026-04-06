@@ -51,4 +51,3 @@ const connectDB = async () => {
     }
 };
 exports.connectDB = connectDB;
-//# sourceMappingURL=db.config.js.map

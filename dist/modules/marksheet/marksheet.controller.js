@@ -18,4 +18,3 @@ exports.MarksheetController = {
         res.send(pdfBuffer);
     },
 };
-//# sourceMappingURL=marksheet.controller.js.map

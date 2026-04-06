@@ -7,4 +7,3 @@ router.post("/", resultConfig_controller_1.ResultConfigController.create);
 router.get("/active", resultConfig_controller_1.ResultConfigController.active);
 router.get("/", resultConfig_controller_1.ResultConfigController.list);
 exports.default = router;
-//# sourceMappingURL=resultConfig.routes.js.map

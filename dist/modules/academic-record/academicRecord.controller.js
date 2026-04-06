@@ -36,4 +36,3 @@ exports.AcademicRecordController = {
         res.json(docs);
     },
 };
-//# sourceMappingURL=academicRecord.controller.js.map

@@ -27,4 +27,3 @@ if (require.main === module) {
     startServer();
 }
 exports.default = app_1.default;
-//# sourceMappingURL=server.js.map

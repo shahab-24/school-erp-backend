@@ -8,4 +8,3 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 function signJwt(payload, secret, options) {
     return jsonwebtoken_1.default.sign(payload, secret, options);
 }
-//# sourceMappingURL=jwt.util.js.map

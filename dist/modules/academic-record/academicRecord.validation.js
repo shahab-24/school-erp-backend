@@ -19,4 +19,3 @@ exports.upsertRecordSchema = zod_1.z
 exports.changeStatusSchema = zod_1.z.object({
     action: zod_1.z.enum(["submit", "unlock", "publish"]),
 });
-//# sourceMappingURL=academicRecord.validation.js.map

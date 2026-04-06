@@ -10,4 +10,3 @@ exports.loginSchema = zod_1.z.object({
         .min(6, "Password must be at least 6 characters")
         .max(50, "Password too long"),
 });
-//# sourceMappingURL=auth.validation.js.map

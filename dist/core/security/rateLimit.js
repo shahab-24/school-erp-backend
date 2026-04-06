@@ -14,4 +14,3 @@ exports.publicLimiter = (0, express_rate_limit_1.default)({
     windowMs: 1 * 60 * 1000,
     max: 100,
 });
-//# sourceMappingURL=rateLimit.js.map

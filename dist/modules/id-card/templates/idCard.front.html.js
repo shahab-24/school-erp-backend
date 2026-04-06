@@ -46,4 +46,3 @@ function renderIDCardFront(data) {
 </body>
 </html>`;
 }
-//# sourceMappingURL=idCard.front.html.js.map

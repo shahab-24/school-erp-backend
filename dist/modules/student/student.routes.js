@@ -29,4 +29,3 @@ router.patch("/:studentUid/image", (0, auth_1.auth)(), (0, requireRole_1.require
 router.get("/:studentUid/stipend-beneficiary", (0, auth_1.auth)(), (0, requireRole_1.requireRole)("SCHOOL_ADMIN", "TEACHER"), student_controller_1.StudentController.getStipendBeneficiary);
 router.patch("/:studentUid/stipend-beneficiary", (0, auth_1.auth)(), (0, requireRole_1.requireRole)("SCHOOL_ADMIN"), student_controller_1.StudentController.updateStipendBeneficiary);
 exports.default = router;
-//# sourceMappingURL=student.routes.js.map

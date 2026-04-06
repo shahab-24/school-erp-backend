@@ -74,4 +74,3 @@ exports.IDCardService = {
         return { frontPdf, backPdf };
     },
 };
-//# sourceMappingURL=idCard.service.js.map

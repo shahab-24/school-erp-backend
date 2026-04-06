@@ -14,4 +14,3 @@ exports.IDCardController = {
         res.send(frontPdf);
     },
 };
-//# sourceMappingURL=idCard.controller.js.map

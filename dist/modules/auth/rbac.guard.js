@@ -15,4 +15,3 @@ const requireRole = (...roles) => {
     };
 };
 exports.requireRole = requireRole;
-//# sourceMappingURL=rbac.guard.js.map

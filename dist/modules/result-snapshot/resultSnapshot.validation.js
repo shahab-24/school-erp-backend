@@ -27,4 +27,3 @@ exports.publishSnapshotSchema = zod_1.z
     .refine((data) => data.scope === "annual" || data.terminalKey, {
     message: "terminalKey required when scope=terminal",
 });
-//# sourceMappingURL=resultSnapshot.validation.js.map

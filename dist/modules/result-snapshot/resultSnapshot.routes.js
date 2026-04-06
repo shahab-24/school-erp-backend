@@ -7,4 +7,3 @@ router.post("/publish", resultSnapshot_controller_1.ResultSnapshotController.pub
 router.get("/class", resultSnapshot_controller_1.ResultSnapshotController.classList);
 router.get("/student/:studentId", resultSnapshot_controller_1.ResultSnapshotController.student);
 exports.default = router;
-//# sourceMappingURL=resultSnapshot.routes.js.map

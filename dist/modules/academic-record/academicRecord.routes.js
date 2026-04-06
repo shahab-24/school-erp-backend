@@ -12,4 +12,3 @@ router.patch("/status", auth_middleware_1.authenticate, (0, rbac_guard_1.require
 // Admin view
 router.get("/class", auth_middleware_1.authenticate, (0, rbac_guard_1.requireRole)("SCHOOL_ADMIN"), academicRecord_controller_1.AcademicRecordController.classList);
 exports.default = router;
-//# sourceMappingURL=academicRecord.routes.js.map

@@ -153,4 +153,3 @@ StudentSchema.index({ "current.class": 1, "current.session": 1 });
 StudentSchema.index({ status: 1 });
 StudentSchema.index({ gender: 1 });
 exports.Student = mongoose_1.default.model("Student", StudentSchema);
-//# sourceMappingURL=student.model.js.map

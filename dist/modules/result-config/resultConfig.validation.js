@@ -43,4 +43,3 @@ exports.createResultConfigSchema = zod_1.z.object({
     })
         .optional(),
 });
-//# sourceMappingURL=resultConfig.validation.js.map

@@ -96,4 +96,3 @@ router.get("/", (_req, res) => {
     });
 });
 exports.default = router;
-//# sourceMappingURL=routes.js.map

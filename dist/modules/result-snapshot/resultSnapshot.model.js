@@ -70,4 +70,3 @@ ResultSnapshotSchema.index({
     studentId: 1,
 }, { unique: true });
 exports.ResultSnapshot = (0, mongoose_1.model)("ResultSnapshot", ResultSnapshotSchema);
-//# sourceMappingURL=resultSnapshot.model.js.map

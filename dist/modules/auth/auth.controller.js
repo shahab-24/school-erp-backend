@@ -64,4 +64,3 @@ exports.AuthController = {
         });
     },
 };
-//# sourceMappingURL=auth.controller.js.map

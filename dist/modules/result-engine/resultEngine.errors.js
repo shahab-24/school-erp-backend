@@ -15,4 +15,3 @@ class ValidationError extends ResultEngineError {
     }
 }
 exports.ValidationError = ValidationError;
-//# sourceMappingURL=resultEngine.errors.js.map
