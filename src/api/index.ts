@@ -1,19 +1,17 @@
-// api/index.ts
-import app from "../src/app";
-import connectDB from "../src/utils/db";
+import app from "../app";
+import connectDB from "../utils/db";
 
 let isConnected = false;
 
 export default async function handler(req: any, res: any) {
   try {
     if (!isConnected) {
-      console.log("ðŸ”„ Connecting to MongoDB in serverless...");
+      console.log("í´„ Connecting to MongoDB...");
       await connectDB();
       isConnected = true;
       console.log("âœ… MongoDB connected");
     }
 
-    // CORS headers
     const allowedOrigins = [
       "http://localhost:3000",
       "https://school-erp-frontend-one.vercel.app",
@@ -24,14 +22,8 @@ export default async function handler(req: any, res: any) {
     }
 
     res.setHeader("Access-Control-Allow-Credentials", "true");
-    res.setHeader(
-      "Access-Control-Allow-Methods",
-      "GET,OPTIONS,PATCH,DELETE,POST,PUT"
-    );
-    res.setHeader(
-      "Access-Control-Allow-Headers",
-      "Content-Type, Authorization"
-    );
+    res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
     if (req.method === "OPTIONS") {
       res.status(200).end();

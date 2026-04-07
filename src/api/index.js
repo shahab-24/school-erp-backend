@@ -7,22 +7,19 @@ exports.default = handler;
 // api/index.ts
 const app_1 = __importDefault(require("../src/app"));
 const db_1 = __importDefault(require("../src/utils/db"));
-// ✅ Global cache for serverless (prevents multiple connections)
 let isConnected = false;
 async function handler(req, res) {
     try {
-        // ✅ Connect to MongoDB only once
         if (!isConnected) {
             console.log("🔄 Connecting to MongoDB in serverless...");
             await (0, db_1.default)();
             isConnected = true;
-            console.log("✅ MongoDB connected successfully");
+            console.log("✅ MongoDB connected");
         }
-        // ✅ CORS headers for production
+        // CORS headers
         const allowedOrigins = [
             "http://localhost:3000",
             "https://school-erp-frontend-one.vercel.app",
-            "https://school-erp-frontend-8bpr16bo5-shahab-uddins-projects.vercel.app",
         ];
         const origin = req.headers.origin;
         if (allowedOrigins.includes(origin)) {
@@ -30,7 +27,7 @@ async function handler(req, res) {
         }
         res.setHeader("Access-Control-Allow-Credentials", "true");
         res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT");
-        res.setHeader("Access-Control-Allow-Headers", "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
         if (req.method === "OPTIONS") {
             res.status(200).end();
             return;
@@ -38,10 +35,7 @@ async function handler(req, res) {
         return (0, app_1.default)(req, res);
     }
     catch (error) {
-        console.error("❌ Serverless function error:", error);
-        res.status(500).json({
-            success: false,
-            message: "Internal server error",
-        });
+        console.error("❌ Serverless error:", error);
+        res.status(500).json({ success: false, message: "Internal server error" });
     }
 }

@@ -29,3 +29,10 @@ pnpm-debug.log*
 Thumbs.db
 .vercel
 .env*.local
+# Vercel
+
+dist
+node_modules
+
+# Don't ignore api folder
+!api/

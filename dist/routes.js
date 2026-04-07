@@ -80,6 +80,15 @@ router.use("/upload", upload_routes_1.default);
 router.use("/exam-types", examType_routes_1.default); // ✅ ঠিক আছে - হবে /api/v1/exam-types
 router.use("/mark-structures", markStructure_routes_1.default); // ✅ ঠিক আছে - হবে /api/v1/exam-types
 // Root info route
+router.get("/debug", (req, res) => {
+    res.json({
+        success: true,
+        message: "API is working!",
+        timestamp: new Date().toISOString(),
+        env: process.env.NODE_ENV,
+        vercel: !!process.env.VERCEL,
+    });
+});
 router.get("/", (_req, res) => {
     res.json({
         success: true,
