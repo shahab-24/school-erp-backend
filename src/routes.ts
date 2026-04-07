@@ -84,6 +84,16 @@ router.use("/exam-types", examRoutes); // ✅ ঠিক আছে - হবে /a
 router.use("/mark-structures", markstructuresRoutes); // ✅ ঠিক আছে - হবে /api/v1/exam-types
 
 // Root info route
+router.get("/debug", (req, res) => {
+  res.json({
+    success: true,
+    message: "API is working!",
+    timestamp: new Date().toISOString(),
+    env: process.env.NODE_ENV,
+    vercel: !!process.env.VERCEL,
+  });
+});
+
 router.get("/", (_req, res) => {
   res.json({
     success: true,

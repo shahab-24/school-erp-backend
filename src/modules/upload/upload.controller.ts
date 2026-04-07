@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import cloudinary from "../../core/utils/cloudinary";
-
+import streamifier from 'streamifier';
 
 export const uploadImage = async (req: Request, res: Response) => {
   if (!req.file) {
@@ -11,9 +11,24 @@ export const uploadImage = async (req: Request, res: Response) => {
   }
 
   try {
-    const result = await cloudinary.uploader.upload(req.file.path, {
-      folder: "erp/students",
-    });
+    // ✅ buffer → stream → cloudinary
+    const streamUpload = () => {
+      return new Promise<any>((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+          {
+            folder: "erp/students",
+          },
+          (error, result) => {
+            if (result) resolve(result);
+            else reject(error);
+          }
+        );
+
+        streamifier.createReadStream(req.file!.buffer).pipe(stream);
+      });
+    };
+
+    const result = await streamUpload();
 
     res.json({
       success: true,
