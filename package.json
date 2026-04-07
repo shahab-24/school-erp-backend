@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+ 
   "scripts": {
-  "build": "tsc",
-  "vercel-build": "npm run build",
-  "dev": "ts-node src/server.ts",
-  "start": "node dist/server.js"
+    "build": "tsc --skipLibCheck",
+    "vercel-build": "npm run build",
+    "dev": "ts-node src/server.ts",
+    "start": "node dist/server.js"
+  
 },
   "engines": {
     "node": "20.x"

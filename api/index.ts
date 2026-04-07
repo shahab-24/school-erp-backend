@@ -13,7 +13,7 @@ export default async function handler(req: any, res: any) {
       console.log("✅ MongoDB connected");
     }
 
-    // ✅ CORS headers
+    // CORS headers
     const allowedOrigins = [
       "http://localhost:3000",
       "https://school-erp-frontend-one.vercel.app",
