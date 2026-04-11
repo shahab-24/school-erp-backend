@@ -131,14 +131,20 @@ export const AuthService = {
       throw new Error("Invalid credentials");
     }
 
-    user.lastLogin = new Date();
-    await user.save();
+    // 🔥 CRITICAL CHECK
+    if (!user.schoolId) {
+      throw new Error("User is not assigned to any school");
+    }
+
+    // ✅ NO VALIDATION TRIGGER
+    await User.updateOne({ _id: user._id }, { lastLogin: new Date() });
 
     const userEmail = user.email || "";
 
     const payload: JwtPayload = {
       userId: user._id.toString(),
-      role: user.role as Role,
+      schoolId: user.schoolId.toString(),
+      role: user.role,
       email: userEmail,
     };
 
@@ -153,7 +159,7 @@ export const AuthService = {
         email: userEmail,
         role: user.role as Role,
         name: user.name || userEmail.split("@")[0],
-        lastLogin: user.lastLogin,
+        lastLogin: new Date(),
       },
     };
   },

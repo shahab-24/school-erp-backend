@@ -3,8 +3,9 @@ import jwt from "jsonwebtoken";
 import { UnauthorizedError } from "../httpErrors";
 
 export interface AuthRequest extends Request {
-  user?: {
+  user: {
     userId: string;
+    schoolId: string;
     role: string;
   };
 }
@@ -37,6 +38,7 @@ export const auth = () => {
 
       req.user = {
         userId: decoded.userId,
+        schoolId: decoded.schoolId,
         role: decoded.role,
       };
 

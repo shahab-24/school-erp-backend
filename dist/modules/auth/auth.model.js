@@ -13,6 +13,11 @@ const UserSchema = new mongoose_1.Schema({
     },
     passwordHash: { type: String },
     name: { type: String },
+    schoolId: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        required: true,
+        index: true,
+    },
     role: {
         type: String,
         enum: ["SUPER_ADMIN", "SCHOOL_ADMIN", "TEACHER", "STUDENT", "VIEWER"],

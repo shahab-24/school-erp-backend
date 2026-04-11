@@ -4,45 +4,60 @@ import {
   updateMarkStructureSchema,
 } from "./markStructure.validation";
 import { MarkStructureService } from "./markStructure.service";
-
 export const MarkStructureController = {
-  async create(req: Request, res: Response, next: NextFunction) {
+  async create(req, res, next) {
     try {
       const payload = createMarkStructureSchema.parse(req.body);
-      const data = await MarkStructureService.create(payload);
+
+      const data = await MarkStructureService.create(
+        payload,
+        req.user.schoolId
+      );
+
       res.status(201).json({ success: true, data });
     } catch (err) {
       next(err);
     }
   },
 
-  async list(_req: Request, res: Response, next: NextFunction) {
+  async list(req, res, next) {
     try {
-      const data = await MarkStructureService.list();
+      const data = await MarkStructureService.list(req.user.schoolId);
+
       res.json({ success: true, data });
     } catch (err) {
       next(err);
     }
   },
 
-  async update(req: Request, res: Response, next: NextFunction) {
+  async update(req, res, next) {
     try {
       const payload = updateMarkStructureSchema.parse(req.body);
-      const result = await MarkStructureService.update(req.params.id, payload);
-      if (!result)
-        return res.status(404).json({ success: false, message: "Not found" });
+
+      const result = await MarkStructureService.update(
+        req.params.id,
+        payload,
+        req.user.schoolId
+      );
+
+      if (!result) return res.status(404).json({ success: false });
+
       res.json({ success: true, data: result });
     } catch (err) {
       next(err);
     }
   },
 
-  async remove(req: Request, res: Response, next: NextFunction) {
+  async remove(req, res, next) {
     try {
-      const result = await MarkStructureService.delete(req.params.id);
-      if (!result)
-        return res.status(404).json({ success: false, message: "Not found" });
-      res.json({ success: true, message: "Deleted" });
+      const result = await MarkStructureService.delete(
+        req.params.id,
+        req.user.schoolId
+      );
+
+      if (!result) return res.status(404).json({ success: false });
+
+      res.json({ success: true });
     } catch (err) {
       next(err);
     }

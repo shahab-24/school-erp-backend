@@ -6,18 +6,27 @@ import {
 } from "./academicRecord.validation";
 import mongoose from "mongoose";
 import { AcademicRecordService } from "./academicRecord.service";
+import { UpsertDraftPayload } from "./academicRecord.types";
 
 export const AcademicRecordController = {
-  async saveDraft(req: Request, res: Response) {
+ async saveDraft(req: Request, res: Response) {
     const data = upsertRecordSchema.parse(req.body);
-
-   const doc = await AcademicRecordService.upsertDraft({
-     ...data,
-     schoolId: data.schoolId,
-   });
-
+    
+    // ✅ Ensure all required fields exist
+    const payload: UpsertDraftPayload = {
+      schoolId: data.schoolId,
+      studentId: data.studentId!,
+      session: data.session!,
+      class: data.class!,
+      scope: data.scope,
+      terminalKey: data.terminalKey,
+      marks: data.marks || {},
+    };
+    
+    const doc = await AcademicRecordService.upsertDraft(payload);
     res.json(doc);
   },
+  
 
   async changeStatus(req: Request & { user?: any }, res: Response) {
     const { action } = changeStatusSchema.parse(req.body);
@@ -51,5 +60,6 @@ export const AcademicRecordController = {
     const docs = await AcademicRecordService.listByClass(req.query);
 
     res.json(docs);
-  },
-};
+  }
+
+}

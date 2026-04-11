@@ -174,6 +174,12 @@ app.use((0, compression_1.default)());
 app.use(express_1.default.json({ limit: "10mb" }));
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cookie_parser_1.default)());
+app.get("/", (_req, res) => {
+    res.json({
+        success: true,
+        message: "API is running 🚀",
+    });
+});
 app.get("/health", (_req, res) => res.json({ status: "ok" }));
 app.use("/api/v1", routes_1.default);
 app.use("*", (_req, res) => res.status(404).json({ success: false, message: "Route not found" }));

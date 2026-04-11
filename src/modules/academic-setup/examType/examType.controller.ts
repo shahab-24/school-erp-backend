@@ -5,12 +5,19 @@ import {
 } from "./examType.validation";
 import { ExamTypeService } from "./examType.service";
 
+type AuthRequest = Request & {
+  user: {
+    userId: string;
+    schoolId: string;
+    role: string;
+  };
+};
 export const ExamTypeController = {
-  async create(req: Request, res: Response, next: NextFunction) {
+  async create(req: AuthRequest, res: Response, next: NextFunction) {
     try {
       const parsed = createExamTypeSchema.parse(req.body);
 
-      const result = await ExamTypeService.create(parsed);
+      const result = await ExamTypeService.create(parsed, req.user.schoolId);
 
       res.status(201).json({
         success: true,
@@ -21,9 +28,9 @@ export const ExamTypeController = {
     }
   },
 
-  async list(_req: Request, res: Response, next: NextFunction) {
+  async list(req: AuthRequest, res: Response, next: NextFunction) {
     try {
-      const data = await ExamTypeService.list();
+      const data = await ExamTypeService.list(req.user.schoolId);
 
       res.json({
         success: true,
@@ -34,11 +41,15 @@ export const ExamTypeController = {
     }
   },
 
-  async update(req: Request, res: Response, next: NextFunction) {
+  async update(req: AuthRequest, res: Response, next: NextFunction) {
     try {
       const parsed = updateExamTypeSchema.parse(req.body);
 
-      const result = await ExamTypeService.update(req.params.id, parsed);
+      const result = await ExamTypeService.update(
+        req.params.id,
+        parsed,
+        req.user.schoolId
+      );
 
       if (!result) {
         return res.status(404).json({
@@ -56,9 +67,12 @@ export const ExamTypeController = {
     }
   },
 
-  async toggle(req: Request, res: Response, next: NextFunction) {
+  async toggle(req: AuthRequest, res: Response, next: NextFunction) {
     try {
-      const result = await ExamTypeService.toggle(req.params.id);
+      const result = await ExamTypeService.toggle(
+        req.params.id,
+        req.user.schoolId
+      );
 
       if (!result) {
         return res.status(404).json({
@@ -76,9 +90,19 @@ export const ExamTypeController = {
     }
   },
 
-  async remove(req: Request, res: Response, next: NextFunction) {
+  async remove(req: AuthRequest, res: Response, next: NextFunction) {
     try {
-      await ExamTypeService.delete(req.params.id);
+      const result = await ExamTypeService.delete(
+        req.params.id,
+        req.user.schoolId
+      );
+
+      if (!result) {
+        return res.status(404).json({
+          success: false,
+          message: "Exam type not found",
+        });
+      }
 
       res.json({
         success: true,

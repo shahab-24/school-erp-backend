@@ -6,10 +6,17 @@ const academicRecord_service_1 = require("./academicRecord.service");
 exports.AcademicRecordController = {
     async saveDraft(req, res) {
         const data = academicRecord_validation_1.upsertRecordSchema.parse(req.body);
-        const doc = await academicRecord_service_1.AcademicRecordService.upsertDraft({
-            ...data,
+        // ✅ Ensure all required fields exist
+        const payload = {
             schoolId: data.schoolId,
-        });
+            studentId: data.studentId,
+            session: data.session,
+            class: data.class,
+            scope: data.scope,
+            terminalKey: data.terminalKey,
+            marks: data.marks || {},
+        };
+        const doc = await academicRecord_service_1.AcademicRecordService.upsertDraft(payload);
         res.json(doc);
     },
     async changeStatus(req, res) {
@@ -34,5 +41,5 @@ exports.AcademicRecordController = {
     async classList(req, res) {
         const docs = await academicRecord_service_1.AcademicRecordService.listByClass(req.query);
         res.json(docs);
-    },
+    }
 };

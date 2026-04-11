@@ -8,6 +8,7 @@ export interface IUser {
   email: string;
   passwordHash: string;
   name?: string;
+  schoolId: Schema.Types.ObjectId;
   role: Role;
   studentUid?: string;
   teacherId?: string;
@@ -28,7 +29,11 @@ const UserSchema = new Schema<IUser>(
     },
     passwordHash: { type: String },
     name: { type: String },
-
+    schoolId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      index: true,
+    },
     role: {
       type: String,
       enum: ["SUPER_ADMIN", "SCHOOL_ADMIN", "TEACHER", "STUDENT", "VIEWER"],

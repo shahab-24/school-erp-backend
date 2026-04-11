@@ -17,9 +17,20 @@ exports.StudentController = {
     // ──────────────────────────────────────────────────────────────
     // POST /students
     // ──────────────────────────────────────────────────────────────
+    // src/modules/student/student.controller.ts - create method
     create: asyncHandler(async (req, res) => {
         const data = student_validation_1.createStudentSchema.parse(req.body);
-        const student = await student_service_1.StudentService.create(data);
+        // ✅ Ensure all required fields exist
+        const validatedData = {
+            ...data,
+            studentUid: data.studentUid,
+            current: {
+                session: data.current.session,
+                class: data.current.class,
+                roll: data.current.roll,
+            },
+        };
+        const student = await student_service_1.StudentService.create(validatedData);
         return res.status(201).json({ success: true, data: student });
     }),
     // ──────────────────────────────────────────────────────────────
@@ -59,7 +70,9 @@ exports.StudentController = {
         const classNum = Number(req.query.class);
         const session = req.query.session;
         if (!classNum || !session) {
-            return res.status(400).json({ success: false, message: "class and session required" });
+            return res
+                .status(400)
+                .json({ success: false, message: "class and session required" });
         }
         const students = await student_service_1.StudentService.getClassRoster(classNum, session);
         res.json({ success: true, data: students });

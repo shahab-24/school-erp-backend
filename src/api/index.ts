@@ -1,17 +1,20 @@
+// src/api/index.ts
 import app from "../app";
 import connectDB from "../utils/db";
 
-let isConnected = false;
+// let isConnected = false;
 
 export default async function handler(req: any, res: any) {
   try {
-    if (!isConnected) {
-      console.log("Ì¥Ñ Connecting to MongoDB...");
-      await connectDB();
-      isConnected = true;
+    // MongoDB connection for Vercel
+    // if (!isConnected) {
+    //   console.log("üîÑ Connecting to MongoDB...");
+    //   await connectDB();
+    //   isConnected = true;
+    // }
+    await connectDB();
       console.log("‚úÖ MongoDB connected");
-    }
-
+    // CORS headers
     const allowedOrigins = [
       "http://localhost:3000",
       "https://school-erp-frontend-one.vercel.app",
@@ -22,8 +25,14 @@ export default async function handler(req: any, res: any) {
     }
 
     res.setHeader("Access-Control-Allow-Credentials", "true");
-    res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+    );
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "Content-Type, Authorization"
+    );
 
     if (req.method === "OPTIONS") {
       res.status(200).end();
@@ -31,8 +40,11 @@ export default async function handler(req: any, res: any) {
     }
 
     return app(req, res);
-  } catch (error) {
-    console.error("‚ùå Serverless error:", error);
-    res.status(500).json({ success: false, message: "Internal server error" });
+  } catch (error: any) {
+    console.error("‚ùå Serverless error:", error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message || "Internal server error",
+    });
   }
 }

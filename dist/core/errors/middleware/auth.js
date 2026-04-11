@@ -25,6 +25,7 @@ const auth = () => {
             const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
             req.user = {
                 userId: decoded.userId,
+                schoolId: decoded.schoolId,
                 role: decoded.role,
             };
             next();

@@ -1,6 +1,8 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model, Document, Types } from "mongoose";
 
 export interface IExamType extends Document {
+  schoolId: Types.ObjectId; // ✅ FIXED
+
   name: string;
   code: string;
   order: number;
@@ -9,6 +11,12 @@ export interface IExamType extends Document {
 
 const ExamTypeSchema = new Schema<IExamType>(
   {
+    schoolId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      index: true,
+    },
+
     name: {
       type: String,
       required: true,
@@ -34,11 +42,10 @@ const ExamTypeSchema = new Schema<IExamType>(
       default: true,
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
-ExamTypeSchema.index({ code: 1 }, { unique: true });
+// ✅ multi-tenant safe unique
+ExamTypeSchema.index({ schoolId: 1, code: 1 }, { unique: true });
 
 export const ExamType = model<IExamType>("ExamType", ExamTypeSchema);

@@ -110,6 +110,7 @@ import {
   bulkPromoteSchema,
   imageUploadSchema,
 } from "./student.validation";
+import { BulkPromoteDTO, CreateStudentDTO, ListStudentsQuery, PromoteDTO, StipendDTO } from "./student.types";
 
 // Helper: wrap async handlers
 const asyncHandler =
@@ -118,22 +119,34 @@ const asyncHandler =
     fn(req, res, next).catch(next);
 
 export const StudentController = {
-
   // ──────────────────────────────────────────────────────────────
   // POST /students
   // ──────────────────────────────────────────────────────────────
+  // src/modules/student/student.controller.ts - create method
+
   create: asyncHandler(async (req, res) => {
     const data = createStudentSchema.parse(req.body);
-    const student = await StudentService.create(data);
+
+    // ✅ Ensure all required fields exist
+    const validatedData = {
+      ...data,
+      studentUid: data.studentUid!,
+      current: {
+        session: data.current!.session,
+        class: data.current!.class,
+        roll: data.current!.roll,
+      },
+    } as CreateStudentDTO;
+
+    const student = await StudentService.create(validatedData);
     return res.status(201).json({ success: true, data: student });
   }),
-
   // ──────────────────────────────────────────────────────────────
   // GET /students
   // ──────────────────────────────────────────────────────────────
   list: asyncHandler(async (req, res) => {
     const query = listQuerySchema.parse(req.query);
-    const result = await StudentService.list(query);
+    const result = await StudentService.list(query as ListStudentsQuery);
     return res.json({ success: true, ...result });
   }),
 
@@ -167,9 +180,11 @@ export const StudentController = {
   // ──────────────────────────────────────────────────────────────
   roster: asyncHandler(async (req, res) => {
     const classNum = Number(req.query.class);
-    const session  = req.query.session as string;
+    const session = req.query.session as string;
     if (!classNum || !session) {
-      return res.status(400).json({ success: false, message: "class and session required" });
+      return res
+        .status(400)
+        .json({ success: false, message: "class and session required" });
     }
     const students = await StudentService.getClassRoster(classNum, session);
     res.json({ success: true, data: students });
@@ -188,7 +203,10 @@ export const StudentController = {
   // ──────────────────────────────────────────────────────────────
   updateStatus: asyncHandler(async (req, res) => {
     const { status } = updateStatusSchema.parse(req.body);
-    const student = await StudentService.updateStatus(req.params.studentUid, status);
+    const student = await StudentService.updateStatus(
+      req.params.studentUid,
+      status
+    );
     res.json({ success: true, data: student });
   }),
 
@@ -196,7 +214,7 @@ export const StudentController = {
   // POST /students/:studentUid/promote
   // ──────────────────────────────────────────────────────────────
   promote: asyncHandler(async (req, res) => {
-    const entry = promoteSchema.parse(req.body);
+    const entry = promoteSchema.parse(req.body) as PromoteDTO;
     const student = await StudentService.promote(req.params.studentUid, entry);
     res.json({ success: true, data: student });
   }),
@@ -205,7 +223,7 @@ export const StudentController = {
   // POST /students/bulk-promote
   // ──────────────────────────────────────────────────────────────
   bulkPromote: asyncHandler(async (req, res) => {
-    const payload = bulkPromoteSchema.parse(req.body);
+    const payload = bulkPromoteSchema.parse(req.body) as BulkPromoteDTO;
     const result = await StudentService.bulkPromote(payload);
     res.json({ success: true, data: result });
   }),
@@ -214,7 +232,7 @@ export const StudentController = {
   // PATCH /students/:studentUid/stipend-beneficiary
   // ──────────────────────────────────────────────────────────────
   updateStipendBeneficiary: asyncHandler(async (req, res) => {
-    const data = stipendBeneficiarySchema.parse(req.body);
+    const data = stipendBeneficiarySchema.parse(req.body)as StipendDTO;
     const student = await StudentService.updateStipendBeneficiary(
       req.params.studentUid,
       data
@@ -222,7 +240,7 @@ export const StudentController = {
     res.json({
       success: true,
       message: "Stipend beneficiary updated",
-      data:    student.stipendBeneficiary,
+      data: student.stipendBeneficiary,
     });
   }),
 
@@ -230,7 +248,9 @@ export const StudentController = {
   // GET /students/:studentUid/stipend-beneficiary
   // ──────────────────────────────────────────────────────────────
   getStipendBeneficiary: asyncHandler(async (req, res) => {
-    const data = await StudentService.getStipendBeneficiary(req.params.studentUid);
+    const data = await StudentService.getStipendBeneficiary(
+      req.params.studentUid
+    );
     res.json({ success: true, data });
   }),
 

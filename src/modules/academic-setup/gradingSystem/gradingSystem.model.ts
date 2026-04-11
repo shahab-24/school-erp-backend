@@ -25,4 +25,7 @@ const GradingSystemSchema = new Schema(
   { timestamps: true }
 );
 
+// ❗ one grading system per school
+GradingSystemSchema.index({ schoolId: 1 }, { unique: true });
+
 export const GradingSystem = model("GradingSystem", GradingSystemSchema);
